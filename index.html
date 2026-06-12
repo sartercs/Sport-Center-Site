@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sport Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & TOKENS ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:      #CC0000;
+      --red-dark: #A50000;
+      --red-lite: #FF1A1A;
+      --black:    #0D0D0D;
+      --dark:     #1A1A1A;
+      --mid:      #2C2C2C;
+      --muted:    #555;
+      --border:   #333;
+      --white:    #FFFFFF;
+      --offwhite: #F2F2F2;
+      --text:     #E8E8E8;
+      --live:     #FF4444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; object-fit: cover; }
+
+    /* ─── UTILITY ────────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .tag {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+    .tag.live { background: var(--live); animation: pulse 1.4s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:.6 } }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--white);
+      border-left: 4px solid var(--red);
+      padding-left: 10px;
+      margin-bottom: 16px;
+    }
+
+    /* ─── SCORES TICKER ──────────────────────────────────────────── */
+    #scores-bar {
+      background: var(--dark);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .scores-inner {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      gap: 0;
+    }
+
+    .scores-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--red);
+      white-space: nowrap;
+      padding: 0 14px;
+      border-right: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .scores-viewport {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+    }
+
+    .scores-track {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 0;
+      transition: transform .35s ease;
+    }
+
+    .score-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      border-right: 1px solid var(--border);
+      white-space: nowrap;
+      height: 100%;
+      cursor: default;
+    }
+
+    .score-card:hover { background: var(--mid); }
+
+    .score-teams {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: .03em;
+    }
+
+    .score-info {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .score-result {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .scores-nav {
+      display: flex;
+      height: 100%;
+      border-left: 1px solid var(--border);
+    }
+
+    .scores-nav button {
+      background: none;
+      border: none;
+      color: var(--white);
+      width: 36px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background .2s;
+      height: 100%;
+    }
+
+    .scores-nav button:hover { background: var(--mid); }
+    .scores-nav button:first-child { border-right: 1px solid var(--border); }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────────── */
+    #navbar {
+      background: var(--red);
+      position: sticky;
+      top: 40px;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.5);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-right: 32px;
+      white-space: nowrap;
+    }
+
+    .nav-logo span { color: rgba(255,255,255,.55); }
+
+    nav { display: flex; flex: 1; gap: 2px; }
+
+    nav button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,.85);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 0 18px;
+      height: 56px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+
+    nav button:hover { color: var(--white); background: var(--red-dark); }
+    nav button.active { color: var(--white); border-bottom-color: var(--white); background: var(--red-dark); }
+
+    .nav-search-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      padding: 0 16px;
+      height: 56px;
+      font-size: 18px;
+      opacity: .8;
+      transition: opacity .2s;
+    }
+
+    .nav-search-btn:hover { opacity: 1; }
+
+    /* ─── SECTIONS ───────────────────────────────────────────────── */
+    .page { display: none; padding: 32px 0 48px; }
+    .page.active { display: block; }
+
+    /* ─── HOME ───────────────────────────────────────────────────── */
+    /* Hero grid */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      grid-template-rows: auto auto;
+      gap: 4px;
+      margin-bottom: 40px;
+    }
+
+    .hero-main {
+      grid-row: span 2;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .hero-main img { height: 420px; transition: transform .4s ease; }
+    .hero-main:hover img { transform: scale(1.03); }
+
+    .hero-main .overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.92));
+      padding: 40px 24px 24px;
+    }
+
+    .hero-main .overlay h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--white);
+      margin-top: 8px;
+    }
+
+    .hero-main .overlay p {
+      font-size: 13px;
+      color: #bbb;
+      margin-top: 6px;
+    }
+
+    .hero-side {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .hero-side img { height: 207px; transition: transform .4s ease; }
+    .hero-side:hover img { transform: scale(1.03); }
+
+    .hero-side .overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.88));
+      padding: 24px 16px 14px;
+    }
+
+    .hero-side .overlay h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      margin-top: 6px;
+    }
+
+    /* Home two-col layout */
+    .home-cols {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* News list */
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .news-item:hover { background: rgba(255,255,255,.03); }
+
+    .news-item img { height: 78px; border-radius: 2px; }
+
+    .news-item-body { display: flex; flex-direction: column; gap: 5px; }
+
+    .news-item-body h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+    }
+
+    .news-item-body p { font-size: 12px; color: #888; }
+
+    /* Sidebar */
+    .sidebar { display: flex; flex-direction: column; gap: 28px; }
+
+    /* Standings widget */
+    .standings-widget {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .standings-header {
+      background: var(--mid);
+      padding: 12px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .standings-table th {
+      background: #222;
+      color: #666;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      padding: 6px 10px;
+      text-align: center;
+    }
+
+    .standings-table th:first-child { text-align: left; }
+
+    .standings-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #222;
+      text-align: center;
+      color: #ccc;
+    }
+
+    .standings-table td:first-child { text-align: left; color: var(--white); font-weight: 600; }
+    .standings-table tr:last-child td { border-bottom: none; }
+    .standings-table tr:hover td { background: rgba(255,255,255,.04); }
+
+    .pos-num { color: #555; font-size: 11px; margin-right: 6px; }
+    .highlight-row td { color: var(--white) !important; }
+    .pts-col { color: var(--white) !important; font-weight: 700 !important; }
+
+    /* Quick links widget */
+    .quick-links {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .quick-links-header {
+      background: var(--mid);
+      padding: 12px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--white);
+    }
+
+    .quick-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 16px;
+      border-bottom: 1px solid #222;
+      color: #ccc;
+      font-size: 13px;
+      transition: background .2s, color .2s;
+    }
+
+    .quick-links a:last-child { border-bottom: none; }
+    .quick-links a:hover { background: rgba(204,0,0,.12); color: var(--white); }
+    .quick-links a span { color: var(--red); font-size: 12px; }
+
+    /* ─── NOTICIAS PAGE ───────────────────────────────────────────── */
+    .news-filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      color: #aaa;
+      padding: 6px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      transition: all .2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .news-card {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    }
+
+    .news-card img { height: 180px; transition: transform .3s; }
+    .news-card:hover img { transform: scale(1.04); }
+    .news-card-body { padding: 14px; }
+
+    .news-card-body h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      margin: 8px 0 6px;
+    }
+
+    .news-card-body p { font-size: 12px; color: #888; line-height: 1.5; }
+    .news-card-meta { font-size: 11px; color: #555; margin-top: 10px; }
+
+    /* ─── PESQUISA PAGE ───────────────────────────────────────────── */
+    .search-hero {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .search-hero h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: var(--black);
+      border: 2px solid var(--border);
+      border-right: none;
+      color: var(--white);
+      padding: 13px 18px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      border-radius: 3px 0 0 3px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .search-box input:focus { border-color: var(--red); }
+    .search-box input::placeholder { color: #555; }
+
+    .search-box button {
+      background: var(--red);
+      border: 2px solid var(--red);
+      color: var(--white);
+      padding: 0 24px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      cursor: pointer;
+      border-radius: 0 3px 3px 0;
+      transition: background .2s;
+    }
+
+    .search-box button:hover { background: var(--red-dark); }
+
+    .search-chips {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      color: #bbb;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .chip:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+
+    /* Player/Team card */
+    #player-result {
+      display: none;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .player-header {
+      background: var(--mid);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .player-header h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .player-body {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr;
+      gap: 0;
+    }
+
+    .player-photo {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      font-size: 60px;
+    }
+
+    .player-info { padding: 24px; border-right: 1px solid var(--border); }
+
+    .player-info h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .player-info .birth { font-size: 12px; color: #666; margin-bottom: 16px; }
+
+    .player-stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 7px 0;
+      border-bottom: 1px solid #222;
+      font-size: 13px;
+    }
+
+    .player-stat-row:last-child { border-bottom: none; }
+    .player-stat-row span:first-child { color: #777; }
+    .player-stat-row span:last-child { color: var(--white); font-weight: 600; }
+
+    .player-news { padding: 24px; }
+
+    .player-news h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .player-news-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #222;
+      font-size: 13px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .player-news-item:last-child { border-bottom: none; }
+    .player-news-item:hover { color: var(--white); }
+    .player-news-item span { display: block; font-size: 11px; color: #555; margin-top: 3px; }
+
+    .search-trending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .trending-box {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .trending-box-header {
+      background: var(--red);
+      padding: 10px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--white);
+    }
+
+    .trending-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #222;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .trending-item:last-child { border-bottom: none; }
+    .trending-item:hover { background: rgba(255,255,255,.04); }
+
+    .trending-rank {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #333;
+      width: 28px;
+      flex-shrink: 0;
+    }
+
+    .trending-item-text { font-size: 13px; color: #ccc; }
+    .trending-item-text small { display: block; color: #555; font-size: 11px; }
+
+    /* ─── ESPORTES PAGE ───────────────────────────────────────────── */
+    .sports-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 28px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .sport-tab {
+      background: none;
+      border: none;
+      color: #888;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .sport-tab:hover { color: var(--white); }
+    .sport-tab.active { color: var(--white); border-bottom-color: var(--red); }
+
+    .sport-content { display: none; }
+    .sport-content.active { display: block; }
+
+    .sport-two-col {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Match results */
+    .matches-section { margin-bottom: 28px; }
+
+    .match-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      gap: 12px;
+    }
+
+    .match-row:first-of-type { border-radius: 4px 4px 0 0; }
+    .match-row:last-of-type { border-bottom: 1px solid var(--border); border-radius: 0 0 4px 4px; }
+
+    .match-status {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .match-status.live { color: var(--live); }
+    .match-status.upcoming { color: #666; }
+    .match-status.finished { color: #555; }
+
+    .match-teams { flex: 1; }
+
+    .match-team {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .match-team .score {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .match-team.winner .score { color: var(--white); }
+    .match-team:not(.winner) .score { color: #666; }
+
+    .match-comp {
+      font-size: 11px;
+      color: #555;
+      min-width: 90px;
+      text-align: right;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      border-top: 3px solid var(--red);
+      padding: 40px 0 24px;
+      margin-top: 60px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .footer-brand p { font-size: 13px; color: #666; line-height: 1.6; }
+
+    .footer-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: #666;
+      padding: 4px 0;
+      transition: color .2s;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #444;
+    }
+
+    /* ─── ARTICLE MODAL ───────────────────────────────────────────── */
+    #modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 40px 20px;
+    }
+
+    #modal-overlay.open { display: block; }
+
+    .modal-card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .modal-card img { height: 340px; }
+
+    .modal-body { padding: 32px; }
+
+    .modal-body h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin: 10px 0 16px;
+    }
+
+    .modal-body p { font-size: 15px; color: #bbb; line-height: 1.7; margin-bottom: 14px; }
+    .modal-meta { font-size: 12px; color: #555; margin-bottom: 12px; }
+
+    .modal-close {
+      display: flex;
+      justify-content: flex-end;
+      padding: 14px 16px 0;
+    }
+
+    .modal-close button {
+      background: none;
+      border: 1px solid var(--border);
+      color: #aaa;
+      padding: 6px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all .2s;
+    }
+
+    .modal-close button:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- SCORES TICKER                                                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="scores-bar">
+  <div class="container">
+    <div class="scores-inner">
+      <div class="scores-label">AO VIVO</div>
+      <div class="scores-viewport">
+        <div class="scores-track" id="scores-track">
+
+          <div class="score-card">
+            <span class="tag live">● VIVO</span>
+            <span class="score-teams">Brasil <b>vs</b> Argentina</span>
+            <span class="score-result">2 – 1</span>
+            <span class="score-info">67' • 2º Tempo • Eliminatórias</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag live">● VIVO</span>
+            <span class="score-teams">Real Madrid <b>vs</b> PSG</span>
+            <span class="score-result">1 – 1</span>
+            <span class="score-info">51' • 2º Tempo • Champions League</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag live">● VIVO</span>
+            <span class="score-teams">Flamengo <b>vs</b> Palmeiras</span>
+            <span class="score-result">0 – 0</span>
+            <span class="score-info">23' • 1º Tempo • Brasileirão Série A</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#444">HOJE</span>
+            <span class="score-teams">Bayern <b>vs</b> Dortmund</span>
+            <span class="score-result" style="font-size:13px;color:#888">18:30</span>
+            <span class="score-info">Bundesliga</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#444">HOJE</span>
+            <span class="score-teams">Portugal <b>vs</b> Espanha</span>
+            <span class="score-result" style="font-size:13px;color:#888">20:45</span>
+            <span class="score-info">UEFA Nations League</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#444">HOJE</span>
+            <span class="score-teams">Manchester City <b>vs</b> Arsenal</span>
+            <span class="score-result" style="font-size:13px;color:#888">17:00</span>
+            <span class="score-info">Premier League</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#2a5a2a">FINAL</span>
+            <span class="score-teams">Corinthians <b>vs</b> São Paulo</span>
+            <span class="score-result">3 – 2</span>
+            <span class="score-info">Copa do Brasil</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="scores-nav">
+        <button id="scores-prev" title="Anterior">&#8249;</button>
+        <button id="scores-next" title="Próximo">&#8250;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- NAVBAR                                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="navbar">
+  <div class="container nav-inner">
+    <div class="nav-logo">Sport<span>Center</span></div>
+    <nav>
+      <button class="nav-btn active" data-page="home">Home</button>
+      <button class="nav-btn" data-page="noticias">Notícias</button>
+      <button class="nav-btn" data-page="esportes">Esportes</button>
+      <button class="nav-btn" data-page="pesquisa">Pesquisa</button>
+    </nav>
+    <button class="nav-search-btn" onclick="goToSearch()" title="Pesquisar">&#128269;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- HOME                                                            -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="hero-grid" style="margin-bottom:36px;">
+      <div class="hero-main" onclick="openArticle('hero')">
+        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80" alt="Brasil vs Argentina" />
+        <div class="overlay">
+          <span class="tag live">● AO VIVO</span>
+          <h2>Brasil domina e vence Argentina por 2 a 1 nas Eliminatórias da Copa do Mundo</h2>
+          <p>Vinicius Jr. brilhou com dois gols no segundo tempo. Confira o resumo completo da partida.</p>
+        </div>
+      </div>
+      <div class="hero-side" onclick="openArticle('side1')">
+        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&q=80" alt="Champions League" />
+        <div class="overlay">
+          <span class="tag">Champions</span>
+          <h3>Real Madrid e PSG empatam em 1 a 1 na ida das oitavas</h3>
+        </div>
+      </div>
+      <div class="hero-side" onclick="openArticle('side2')">
+        <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=500&q=80" alt="Copa do Brasil" />
+        <div class="overlay">
+          <span class="tag">Copa do Brasil</span>
+          <h3>Corinthians vira sobre o São Paulo e avança às semifinais</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two columns -->
+    <div class="home-cols">
+      <!-- Left: news list -->
+      <div>
+        <div class="section-title">Últimas Notícias</div>
+        <div class="news-list">
+
+          <div class="news-item" onclick="openArticle('n1')">
+            <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=300&q=80" alt="" />
+            <div class="news-item-body">
+              <span class="tag">Brasileirão</span>
+              <h4>Palmeiras goleia o Atlético-MG por 4 a 0 e assume liderança</h4>
+              <p>15 min atrás • Brasileirão Série A</p>
+            </div>
+          </div>
+
+          <div class="news-item" onclick="openArticle('n2')">
+            <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=300&q=80" alt="" />
+            <div class="news-item-body">
+              <span class="tag">Seleção</span>
+              <h4>Endrick é convocado por Ancelotti e deve estrear no amistoso contra o Marrocos</h4>
+              <p>1 hora atrás • Seleção Brasileira</p>
+            </div>
+          </div>
+
+          <div class="news-item" onclick="openArticle('n3')">
+            <img src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=300&q=80" alt="" />
+            <div class="news-item-body">
+              <span class="tag">La Liga</span>
+              <h4>Barcelona anuncia renovação de contrato com Lamine Yamal até 2030</h4>
+              <p>2 horas atrás • La Liga</p>
+            </div>
+          </div>
+
+          <div class="news-item" onclick="openArticle('n4')">
+            <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=300&q=80" alt="" />
+            <div class="news-item-body">
+              <span class="tag">Transfer</span>
+              <h4>Transferências: Manchester United negocia com atacante do Napoli por €80 milhões</h4>
+              <p>3 horas atrás • Mercado da Bola</p>
+            </div>
+          </div>
+
+          <div class="news-item" onclick="openArticle('n5')">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=300&q=80" alt="" />
+            <div class="news-item-body">
+              <span class="tag">Copa</span>
+              <h4>FIFA revela sedes dos grupos para a Copa do Mundo 2026</h4>
+              <p>5 horas atrás • Copa do Mundo</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: sidebar -->
+      <div class="sidebar">
+
+        <!-- Standings -->
+        <div class="standings-widget">
+          <div class="standings-header">
+            <span>Brasileirão Série A</span>
+            <span style="font-size:11px;color:#888;font-weight:400">Rodada 18</span>
+          </div>
+          <table class="standings-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Time</th>
+                <th>J</th>
+                <th>V</th>
+                <th>E</th>
+                <th>D</th>
+                <th>Pts</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Palmeiras</td><td>18</td><td>12</td><td>4</td><td>2</td><td class="pts-col">40</td></tr>
+              <tr><td>2</td><td>Flamengo</td><td>18</td><td>11</td><td>3</td><td>4</td><td class="pts-col">36</td></tr>
+              <tr><td>3</td><td>Corinthians</td><td>18</td><td>10</td><td>5</td><td>3</td><td class="pts-col">35</td></tr>
+              <tr><td>4</td><td>Atlético-MG</td><td>18</td><td>10</td><td>2</td><td>6</td><td class="pts-col">32</td></tr>
+              <tr><td>5</td><td>Internacional</td><td>18</td><td>9</td><td>4</td><td>5</td><td class="pts-col">31</td></tr>
+              <tr><td>6</td><td>São Paulo</td><td>18</td><td>8</td><td>5</td><td>5</td><td class="pts-col">29</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Quick links -->
+        <div class="quick-links">
+          <div class="quick-links-header">Competições em Destaque</div>
+          <a href="#" onclick="goToSport('ucl');return false;">Champions League <span>›</span></a>
+          <a href="#" onclick="goToSport('br');return false;">Brasileirão Série A <span>›</span></a>
+          <a href="#" onclick="goToSport('laliga');return false;">La Liga <span>›</span></a>
+          <a href="#" onclick="goToSport('pl');return false;">Premier League <span>›</span></a>
+          <a href="#" onclick="switchPage('noticias');return false;">Copa do Brasil <span>›</span></a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- NOTÍCIAS                                                         -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-noticias" class="page">
+  <div class="container">
+    <div class="section-title" style="margin-bottom:20px">Todas as Notícias</div>
+    <div class="news-filter-bar">
+      <button class="filter-btn active" data-filter="all">Tudo</button>
+      <button class="filter-btn" data-filter="selecao">Seleção</button>
+      <button class="filter-btn" data-filter="brasileirao">Brasileirão</button>
+      <button class="filter-btn" data-filter="champions">Champions</button>
+      <button class="filter-btn" data-filter="laliga">La Liga</button>
+      <button class="filter-btn" data-filter="premier">Premier League</button>
+      <button class="filter-btn" data-filter="transfer">Transferências</button>
+    </div>
+
+    <div class="news-grid" id="news-grid">
+
+      <div class="news-card" data-cat="selecao" onclick="openArticle('nc1')">
+        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Seleção</span>
+          <h3>Brasil vence Argentina e abre 6 pontos na liderança das Eliminatórias</h3>
+          <p>Com dois gols de Vinicius Jr. e assistência de Rodrygo, a Canarinho mostrou evolução tática sob Ancelotti.</p>
+          <div class="news-card-meta">Há 15 min · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="champions" onclick="openArticle('nc2')">
+        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Champions</span>
+          <h3>Real Madrid x PSG: análise tática do empate em Madrid</h3>
+          <p>Mbappé voltou ao Parque dos Príncipes como visitante e foi vaiado por torcedores do PSG.</p>
+          <div class="news-card-meta">Há 1h · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc3')">
+        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Brasileirão</span>
+          <h3>Palmeiras goleia o Atlético-MG por 4 a 0 e dispara na liderança</h3>
+          <p>Estêvão foi o destaque com dois gols e uma assistência no Allianz Parque lotado.</p>
+          <div class="news-card-meta">Há 2h · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="laliga" onclick="openArticle('nc4')">
+        <img src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">La Liga</span>
+          <h3>Lamine Yamal renova com o Barcelona e recebe aumento salarial expressivo</h3>
+          <p>O jovem espanhol de 17 anos assinou contrato até 2030 com cláusula de rescisão de €1 bilhão.</p>
+          <div class="news-card-meta">Há 3h · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="transfer" onclick="openArticle('nc5')">
+        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Transferências</span>
+          <h3>Manchester United faz proposta de €80 mi pelo atacante Khvicha Kvaratskhelia</h3>
+          <p>O Napoli já indicou que precisa de uma oferta superior a €100 milhões para negociar o georgiano.</p>
+          <div class="news-card-meta">Há 4h · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="selecao" onclick="openArticle('nc6')">
+        <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Seleção</span>
+          <h3>Endrick deve ser titular de Ancelotti no próximo amistoso da Seleção</h3>
+          <p>O centroavante do Real Madrid vive boa fase e deve ganhar oportunidade na equipe principal.</p>
+          <div class="news-card-meta">Há 5h · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="premier" onclick="openArticle('nc7')">
+        <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Premier League</span>
+          <h3>Arsenal de Arteta enfrenta o City com vantagem de 3 pontos na tabela</h3>
+          <p>O clássico desta tarde pode definir o rumo do título inglês. Confira as escalações prováveis.</p>
+          <div class="news-card-meta">Há 6h · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc8')">
+        <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Copa do Brasil</span>
+          <h3>Corinthians vira em cima do São Paulo na Copa e se classifica por 3 a 2</h3>
+          <p>Em noite especial da torcida fiel, o Timão mostrou força emocional para reverter o placar adverso.</p>
+          <div class="news-card-meta">Há 7h · Sport Center</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="champions" onclick="openArticle('nc9')">
+        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Copa do Mundo</span>
+          <h3>FIFA confirma sedes para a Copa do Mundo de 2026 nos EUA, México e Canadá</h3>
+          <p>O sorteio dos grupos será realizado em Las Vegas em setembro de 2025.</p>
+          <div class="news-card-meta">Há 8h · Sport Center</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- ESPORTES                                                         -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-esportes" class="page">
+  <div class="container">
+    <div class="section-title" style="margin-bottom:20px">Esportes</div>
+
+    <div class="sports-tabs">
+      <button class="sport-tab active" data-sport="futebol">⚽ Futebol</button>
+      <button class="sport-tab" data-sport="basquete">🏀 Basquete</button>
+      <button class="sport-tab" data-sport="f1">🏎 Fórmula 1</button>
+      <button class="sport-tab" data-sport="mma">🥊 MMA</button>
+    </div>
+
+    <!-- FUTEBOL -->
+    <div id="sport-futebol" class="sport-content active">
+      <div class="sport-two-col">
+        <div>
+          <div class="matches-section">
+            <div class="section-title">Ao Vivo</div>
+            <div class="match-row">
+              <div class="match-status live">● 67'</div>
+              <div class="match-teams">
+                <div class="match-team winner">Brasil <span class="score">2</span></div>
+                <div class="match-team">Argentina <span class="score">1</span></div>
+              </div>
+              <div class="match-comp">Eliminatórias<br>2º Tempo</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status live">● 51'</div>
+              <div class="match-teams">
+                <div class="match-team">Real Madrid <span class="score">1</span></div>
+                <div class="match-team">PSG <span class="score">1</span></div>
+              </div>
+              <div class="match-comp">Champions League<br>2º Tempo</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status live">● 23'</div>
+              <div class="match-teams">
+                <div class="match-team">Flamengo <span class="score">0</span></div>
+                <div class="match-team">Palmeiras <span class="score">0</span></div>
+              </div>
+              <div class="match-comp">Brasileirão<br>1º Tempo</div>
+            </div>
+          </div>
+
+          <div class="matches-section">
+            <div class="section-title">Próximos Jogos</div>
+            <div class="match-row">
+              <div class="match-status upcoming">17:00</div>
+              <div class="match-teams">
+                <div class="match-team">Manchester City <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Arsenal <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">Premier League</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status upcoming">18:30</div>
+              <div class="match-teams">
+                <div class="match-team">Bayern Munich <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Borussia Dortmund <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">Bundesliga</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status upcoming">20:45</div>
+              <div class="match-teams">
+                <div class="match-team">Portugal <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Espanha <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">Nations League</div>
+            </div>
+          </div>
+
+          <div class="matches-section">
+            <div class="section-title">Resultados de Ontem</div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">Corinthians <span class="score">3</span></div>
+                <div class="match-team">São Paulo <span class="score">2</span></div>
+              </div>
+              <div class="match-comp">Copa do Brasil</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">Atlético de Madrid <span class="score">2</span></div>
+                <div class="match-team">Sevilla <span class="score">0</span></div>
+              </div>
+              <div class="match-comp">La Liga</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">Palmeiras <span class="score">4</span></div>
+                <div class="match-team">Atlético-MG <span class="score">0</span></div>
+              </div>
+              <div class="match-comp">Brasileirão</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <div class="standings-widget">
+            <div class="standings-header">Champions League<span style="font-size:11px;color:#888;font-weight:400">Fase de Grupos</span></div>
+            <table class="standings-table">
+              <thead><tr><th>#</th><th>Time</th><th>J</th><th>Pts</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Real Madrid</td><td>4</td><td class="pts-col">10</td></tr>
+                <tr><td>2</td><td>Arsenal</td><td>4</td><td class="pts-col">8</td></tr>
+                <tr><td>3</td><td>PSG</td><td>4</td><td class="pts-col">6</td></tr>
+                <tr><td>4</td><td>Bayern</td><td>4</td><td class="pts-col">3</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BASQUETE -->
+    <div id="sport-basquete" class="sport-content">
+      <div class="sport-two-col">
+        <div>
+          <div class="matches-section">
+            <div class="section-title">NBA – Resultados</div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">Los Angeles Lakers <span class="score">118</span></div>
+                <div class="match-team">Golden State Warriors <span class="score">107</span></div>
+              </div>
+              <div class="match-comp">NBA</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">Boston Celtics <span class="score">124</span></div>
+                <div class="match-team">Miami Heat <span class="score">98</span></div>
+              </div>
+              <div class="match-comp">NBA</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status upcoming">22:30</div>
+              <div class="match-teams">
+                <div class="match-team">Oklahoma City <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Denver Nuggets <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">NBA – Playoffs</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="standings-widget">
+            <div class="standings-header">NBA – Conferência Leste</div>
+            <table class="standings-table">
+              <thead><tr><th>#</th><th>Time</th><th>V</th><th>D</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Boston Celtics</td><td>58</td><td class="pts-col">24</td></tr>
+                <tr><td>2</td><td>Milwaukee</td><td>52</td><td class="pts-col">30</td></tr>
+                <tr><td>3</td><td>Miami Heat</td><td>46</td><td class="pts-col">36</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- F1 -->
+    <div id="sport-f1" class="sport-content">
+      <div class="sport-two-col">
+        <div>
+          <div class="matches-section">
+            <div class="section-title">Calendário F1 2026</div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">GP do Bahrein &nbsp;<span style="font-size:12px;font-weight:400;color:#888">1º Verstappen · 2º Leclerc</span><span class="score"></span></div>
+              </div>
+              <div class="match-comp">R1 · Mar</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">GP da Arábia Saudita &nbsp;<span style="font-size:12px;font-weight:400;color:#888">1º Verstappen · 2º Norris</span><span class="score"></span></div>
+              </div>
+              <div class="match-comp">R2 · Mar</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status upcoming">Jun 14</div>
+              <div class="match-teams">
+                <div class="match-team">GP do Canadá <span class="score" style="font-size:13px;color:#666">Treino livre</span></div>
+              </div>
+              <div class="match-comp">R9 · Próximo</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="standings-widget">
+            <div class="standings-header">Campeonato de Pilotos</div>
+            <table class="standings-table">
+              <thead><tr><th>#</th><th>Piloto</th><th>Pts</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Verstappen</td><td class="pts-col">161</td></tr>
+                <tr><td>2</td><td>Norris</td><td class="pts-col">113</td></tr>
+                <tr><td>3</td><td>Leclerc</td><td class="pts-col">97</td></tr>
+                <tr><td>4</td><td>Piastri</td><td class="pts-col">83</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MMA -->
+    <div id="sport-mma" class="sport-content">
+      <div class="sport-two-col">
+        <div>
+          <div class="matches-section">
+            <div class="section-title">UFC – Próximos Eventos</div>
+            <div class="match-row">
+              <div class="match-status upcoming">Jun 21</div>
+              <div class="match-teams">
+                <div class="match-team">Jon Jones <span class="score" style="font-size:13px;color:#666">vs</span></div>
+                <div class="match-team">Stipe Miocic <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">UFC 310<br>Pesado</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status upcoming">Jul 5</div>
+              <div class="match-teams">
+                <div class="match-team">Islam Makhachev <span class="score" style="font-size:13px;color:#666">vs</span></div>
+                <div class="match-team">Dustin Poirier <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">UFC 311<br>Leve</div>
+            </div>
+          </div>
+          <div class="matches-section">
+            <div class="section-title">Últimos Resultados</div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">Alex Pereira &nbsp;<span style="font-size:12px;font-weight:400;color:#aaa">KO no 1º round</span> <span class="score"></span></div>
+                <div class="match-team" style="color:#666">Jiri Prochazka</div>
+              </div>
+              <div class="match-comp">UFC 313<br>Semi-pesado</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="quick-links">
+            <div class="quick-links-header">Cinturões UFC</div>
+            <a href="#">Peso Pesado – Jon Jones <span>›</span></a>
+            <a href="#">Semi-pesado – Alex Pereira <span>›</span></a>
+            <a href="#">Médio – Dricus Du Plessis <span>›</span></a>
+            <a href="#">Leve – Islam Makhachev <span>›</span></a>
+            <a href="#">Pena – Ilia Topuria <span>›</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PESQUISA                                                         -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-pesquisa" class="page">
+  <div class="container">
+
+    <div class="search-hero">
+      <h2>Buscar Jogador, Time ou Notícia</h2>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Ex: Vinicius Jr, Flamengo, Champions League…" />
+        <button onclick="runSearch()">Buscar</button>
+      </div>
+      <div class="search-chips">
+        <span style="font-size:12px;color:#555;margin-right:4px">Buscas populares:</span>
+        <div class="chip" onclick="fillSearch('Vinicius Jr')">Vinicius Jr</div>
+        <div class="chip" onclick="fillSearch('Endrick')">Endrick</div>
+        <div class="chip" onclick="fillSearch('Flamengo')">Flamengo</div>
+        <div class="chip" onclick="fillSearch('Palmeiras')">Palmeiras</div>
+        <div class="chip" onclick="fillSearch('Champions League')">Champions League</div>
+        <div class="chip" onclick="fillSearch('Copa do Mundo 2026')">Copa do Mundo 2026</div>
+      </div>
+    </div>
+
+    <!-- Player/Team result -->
+    <div id="player-result">
+      <div class="player-header">
+        <span id="result-type-tag" class="tag">Jogador</span>
+        <h3 id="result-name">—</h3>
+      </div>
+      <div class="player-body">
+        <div class="player-photo" id="result-emoji">⚽</div>
+        <div class="player-info">
+          <h4 id="result-fullname">—</h4>
+          <div class="birth" id="result-birth">—</div>
+          <div id="result-stats"></div>
+        </div>
+        <div class="player-news">
+          <h5>Últimas Notícias</h5>
+          <div id="result-news"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trending -->
+    <div class="search-trending">
+      <div class="trending-box">
+        <div class="trending-box-header">🔥 Em Alta Agora</div>
+        <div class="trending-item" onclick="fillSearch('Vinicius Jr')">
+          <div class="trending-rank">1</div>
+          <div class="trending-item-text">Vinicius Jr<small>2 gols vs Argentina</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Endrick')">
+          <div class="trending-rank">2</div>
+          <div class="trending-item-text">Endrick<small>Convocação Seleção</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Lamine Yamal')">
+          <div class="trending-rank">3</div>
+          <div class="trending-item-text">Lamine Yamal<small>Renovação com o Barcelona</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Mbappé')">
+          <div class="trending-rank">4</div>
+          <div class="trending-item-text">Mbappé<small>Real Madrid x PSG</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Copa do Mundo 2026')">
+          <div class="trending-rank">5</div>
+          <div class="trending-item-text">Copa do Mundo 2026<small>Sedes confirmadas</small></div>
+        </div>
+      </div>
+
+      <div class="trending-box">
+        <div class="trending-box-header">⚽ Times em Destaque</div>
+        <div class="trending-item" onclick="fillSearch('Flamengo')">
+          <div class="trending-rank">1</div>
+          <div class="trending-item-text">Flamengo<small>2º no Brasileirão</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Palmeiras')">
+          <div class="trending-rank">2</div>
+          <div class="trending-item-text">Palmeiras<small>Líder do Brasileirão</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Real Madrid')">
+          <div class="trending-rank">3</div>
+          <div class="trending-item-text">Real Madrid<small>Oitavas da Champions</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Corinthians')">
+          <div class="trending-rank">4</div>
+          <div class="trending-item-text">Corinthians<small>Semifinal Copa do Brasil</small></div>
+        </div>
+        <div class="trending-item" onclick="fillSearch('Arsenal')">
+          <div class="trending-rank">5</div>
+          <div class="trending-item-text">Arsenal<small>Disputa o título da PL</small></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>SportCenter</h3>
+        <p>O seu portal de notícias esportivas. Cobertura completa de futebol, basquete, Fórmula 1 e MMA, 24 horas por dia.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Futebol</h4>
+        <a href="#">Seleção Brasileira</a>
+        <a href="#">Brasileirão</a>
+        <a href="#">Champions League</a>
+        <a href="#">Copa do Brasil</a>
+        <a href="#">La Liga</a>
+      </div>
+      <div class="footer-col">
+        <h4>Outros Esportes</h4>
+        <a href="#">NBA</a>
+        <a href="#">Fórmula 1</a>
+        <a href="#">UFC / MMA</a>
+        <a href="#">Tênis</a>
+        <a href="#">Olimpíadas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Sport Center</h4>
+        <a href="#">Sobre nós</a>
+        <a href="#">Contato</a>
+        <a href="#">Política de privacidade</a>
+        <a href="#">Termos de uso</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sport Center. Projeto acadêmico.</span>
+      <span>Desenvolvido com HTML, CSS e JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- ARTICLE MODAL                                                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-close"><button onclick="closeModal()">✕ Fechar</button></div>
+    <img id="modal-img" src="" alt="" />
+    <div class="modal-body">
+      <div class="modal-meta" id="modal-meta"></div>
+      <span class="tag" id="modal-tag"></span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-text1"></p>
+      <p id="modal-text2"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT                                                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<script>
+  /* ── PAGE NAVIGATION ─────────────────────────────────────────── */
+  function switchPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    const page = document.getElementById('page-' + name);
+    const btn  = document.querySelector(`.nav-btn[data-page="${name}"]`);
+    if (page) page.classList.add('active');
+    if (btn)  btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchPage(btn.dataset.page));
+  });
+
+  function goToSearch() {
+    switchPage('pesquisa');
+    setTimeout(() => document.getElementById('search-input').focus(), 300);
+  }
+
+  function goToSport(sportId) {
+    switchPage('esportes');
+    const tabMap = { ucl: 'futebol', br: 'futebol', laliga: 'futebol', pl: 'futebol' };
+    activateSportTab(tabMap[sportId] || 'futebol');
+  }
+
+  /* ── SCORES TICKER ───────────────────────────────────────────── */
+  const track = document.getElementById('scores-track');
+  let scoreIndex = 0;
+
+  function getCardWidth() {
+    const cards = track.querySelectorAll('.score-card');
+    if (!cards.length) return 240;
+    return cards[0].getBoundingClientRect().width;
+  }
+
+  function updateTrack() {
+    const w = getCardWidth();
+    track.style.transform = `translateX(-${scoreIndex * w}px)`;
+  }
+
+  document.getElementById('scores-next').addEventListener('click', () => {
+    const total = track.querySelectorAll('.score-card').length;
+    scoreIndex = (scoreIndex + 1) % total;
+    updateTrack();
+  });
+
+  document.getElementById('scores-prev').addEventListener('click', () => {
+    const total = track.querySelectorAll('.score-card').length;
+    scoreIndex = (scoreIndex - 1 + total) % total;
+    updateTrack();
+  });
+
+  /* Auto-advance every 5 s */
+  setInterval(() => {
+    const total = track.querySelectorAll('.score-card').length;
+    scoreIndex = (scoreIndex + 1) % total;
+    updateTrack();
+  }, 5000);
+
+  /* ── SPORTS TABS ─────────────────────────────────────────────── */
+  function activateSportTab(sport) {
+    document.querySelectorAll('.sport-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.sport-content').forEach(c => c.classList.remove('active'));
+    const tab = document.querySelector(`.sport-tab[data-sport="${sport}"]`);
+    const content = document.getElementById('sport-' + sport);
+    if (tab) tab.classList.add('active');
+    if (content) content.classList.add('active');
+  }
+
+  document.querySelectorAll('.sport-tab').forEach(tab => {
+    tab.addEventListener('click', () => activateSportTab(tab.dataset.sport));
+  });
+
+  /* ── NEWS FILTERS ────────────────────────────────────────────── */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.news-card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  /* ── SEARCH / PLAYER LOOKUP ──────────────────────────────────── */
+  const playerDB = {
+    'vinicius jr': {
+      emoji: '🇧🇷',
+      fullname: 'Vinicius José Paixão de Oliveira Júnior',
+      birth: '12 de julho de 2000 · São Gonçalo, RJ',
+      type: 'Jogador',
+      stats: [
+        ['Clube', 'Real Madrid'],
+        ['Posição', 'Atacante / Ponta-esquerda'],
+        ['Seleção', 'Brasil'],
+        ['Gols na temporada', '28'],
+        ['Assistências', '14'],
+        ['Partidas', '42'],
+      ],
+      news: [
+        ['Vini Jr marca 2 gols e Brasil vence Argentina por 2 a 1', 'Há 15 min'],
+        ['Real Madrid renova com Vinicius até 2031 por € 200 mi/ano', 'Há 2h'],
+        ['Vini Jr é favorito ao Ballon d\'Or 2026', 'Há 1 dia'],
+      ]
+    },
+    'endrick': {
+      emoji: '⭐',
+      fullname: 'Endrick Felipe Moreira de Sousa',
+      birth: '21 de julho de 2006 · Brasília, DF',
+      type: 'Jogador',
+      stats: [
+        ['Clube', 'Real Madrid'],
+        ['Posição', 'Centroavante'],
+        ['Seleção', 'Brasil'],
+        ['Gols na temporada', '11'],
+        ['Assistências', '4'],
+        ['Partidas', '28'],
+      ],
+      news: [
+        ['Endrick deve ser titular no próximo amistoso da Seleção', 'Há 1h'],
+        ['Endrick marca gol no amistoso contra o Egito', 'Há 3 dias'],
+        ['Real Madrid planeja empréstimo de Endrick na próxima janela', 'Há 1 semana'],
+      ]
+    },
+    'flamengo': {
+      emoji: '🔴⚫',
+      fullname: 'Clube de Regatas do Flamengo',
+      birth: 'Fundado em 17 de novembro de 1895 · Rio de Janeiro, RJ',
+      type: 'Time',
+      stats: [
+        ['Liga', 'Brasileirão Série A'],
+        ['Posição atual', '2º lugar — 36 pts'],
+        ['Técnico', 'Filipe Luís'],
+        ['Artilheiro', 'Pedro — 14 gols'],
+        ['Estádio', 'Maracanã'],
+        ['Títulos brasileiros', '8'],
+      ],
+      news: [
+        ['Flamengo empata com Palmeiras e segue na vice-liderança', 'Ao vivo'],
+        ['Pedro volta ao time titular após se recuperar de lesão', 'Há 2h'],
+        ['Flamengo mira contratação de zagueiro europeu no mercado', 'Há 4h'],
+      ]
+    },
+    'palmeiras': {
+      emoji: '💚',
+      fullname: 'Sociedade Esportiva Palmeiras',
+      birth: 'Fundado em 26 de agosto de 1914 · São Paulo, SP',
+      type: 'Time',
+      stats: [
+        ['Liga', 'Brasileirão Série A'],
+        ['Posição atual', '1º lugar — 40 pts'],
+        ['Técnico', 'Abel Ferreira'],
+        ['Artilheiro', 'Estêvão — 17 gols'],
+        ['Estádio', 'Allianz Parque'],
+        ['Títulos brasileiros', '11'],
+      ],
+      news: [
+        ['Palmeiras goleia o Atlético-MG por 4 a 0 e dispara na liderança', 'Há 2h'],
+        ['Estêvão vira esperança do Palmeiras na Libertadores', 'Há 5h'],
+        ['Abel Ferreira renova contrato até 2027', 'Há 1 dia'],
+      ]
+    },
+    'mbappé': {
+      emoji: '🇫🇷',
+      fullname: 'Kylian Mbappé Lottin',
+      birth: '20 de dezembro de 1998 · Bondy, França',
+      type: 'Jogador',
+      stats: [
+        ['Clube', 'Real Madrid'],
+        ['Posição', 'Atacante'],
+        ['Seleção', 'França'],
+        ['Gols na temporada', '22'],
+        ['Assistências', '9'],
+        ['Partidas', '35'],
+      ],
+      news: [
+        ['Mbappé é vaiado pela torcida do PSG ao entrar no Parc des Princes', 'Há 1h'],
+        ['Real Madrid x PSG: Mbappé convive com expectativa alta na volta', 'Há 3h'],
+        ['Mbappé revela sonho de ganhar a Champions com o Madrid', 'Há 2 dias'],
+      ]
+    },
+    'lamine yamal': {
+      emoji: '🇪🇸',
+      fullname: 'Lamine Yamal Nasraoui Ebana',
+      birth: '13 de julho de 2007 · Mataró, Espanha',
+      type: 'Jogador',
+      stats: [
+        ['Clube', 'FC Barcelona'],
+        ['Posição', 'Ponta-direita'],
+        ['Seleção', 'Espanha'],
+        ['Gols na temporada', '19'],
+        ['Assistências', '21'],
+        ['Partidas', '44'],
+      ],
+      news: [
+        ['Lamine Yamal renova com o Barcelona até 2030 por €1 bi de multa', 'Há 3h'],
+        ['Yamal é favorito ao prêmio de melhor jovem da Europa', 'Há 6h'],
+        ['Barcelona planeja construir o clube em torno de Yamal', 'Há 1 dia'],
+      ]
+    },
+    'real madrid': {
+      emoji: '👑',
+      fullname: 'Real Madrid Club de Fútbol',
+      birth: 'Fundado em 6 de março de 1902 · Madrid, Espanha',
+      type: 'Time',
+      stats: [
+        ['Liga', 'La Liga'],
+        ['Posição atual', '2º lugar — 74 pts'],
+        ['Técnico', 'Carlo Ancelotti'],
+        ['Artilheiro', 'Mbappé — 22 gols'],
+        ['Estádio', 'Santiago Bernabéu'],
+        ['Champions conquistadas', '15'],
+      ],
+      news: [
+        ['Real Madrid empata com PSG em 1 a 1 na Champions League', 'Há 1h'],
+        ['Ancelotti confirma Endrick no próximo jogo do Real Madrid', 'Há 4h'],
+        ['Real Madrid prepara proposta de €150 mi por Bellingham II', 'Há 1 dia'],
+      ]
+    },
+    'corinthians': {
+      emoji: '⚫⚪',
+      fullname: 'Sport Club Corinthians Paulista',
+      birth: 'Fundado em 1º de setembro de 1910 · São Paulo, SP',
+      type: 'Time',
+      stats: [
+        ['Liga', 'Brasileirão Série A'],
+        ['Posição atual', '3º lugar — 35 pts'],
+        ['Técnico', 'Ramón Díaz'],
+        ['Artilheiro', 'Yuri Alberto — 13 gols'],
+        ['Estádio', 'Neo Química Arena'],
+        ['Títulos brasileiros', '7'],
+      ],
+      news: [
+        ['Corinthians vira sobre o São Paulo e vai à semi da Copa do Brasil', 'Há 7h'],
+        ['Fiel Torcida esgota ingressos para o próximo jogo', 'Há 10h'],
+        ['Corinthians negocia com atacante argentino para reforçar elenco', 'Há 1 dia'],
+      ]
+    }
+  };
+
+  function fillSearch(term) {
+    switchPage('pesquisa');
+    document.getElementById('search-input').value = term;
+    setTimeout(runSearch, 100);
+  }
+
+  function runSearch() {
+    const raw   = document.getElementById('search-input').value.trim();
+    const query = raw.toLowerCase()
+                     .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    if (!query) return;
+
+    /* Try to find in playerDB (normalized keys too) */
+    let match = null;
+    for (const key in playerDB) {
+      const normKey = key.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if (normKey === query || normKey.includes(query) || query.includes(normKey)) {
+        match = playerDB[key];
+        break;
+      }
+    }
+
+    const resultEl = document.getElementById('player-result');
+
+    if (match) {
+      document.getElementById('result-type-tag').textContent = match.type;
+      document.getElementById('result-name').textContent = raw;
+      document.getElementById('result-emoji').textContent = match.emoji;
+      document.getElementById('result-fullname').textContent = match.fullname;
+      document.getElementById('result-birth').textContent = match.birth;
+
+      const statsHtml = match.stats.map(([label, val]) =>
+        `<div class="player-stat-row"><span>${label}</span><span>${val}</span></div>`
+      ).join('');
+      document.getElementById('result-stats').innerHTML = statsHtml;
+
+      const newsHtml = match.news.map(([headline, time]) =>
+        `<div class="player-news-item">${headline}<span>${time}</span></div>`
+      ).join('');
+      document.getElementById('result-news').innerHTML = newsHtml;
+
+      resultEl.style.display = 'block';
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      resultEl.style.display = 'none';
+      /* Redirect to notícias and filter */
+      switchPage('noticias');
+    }
+  }
+
+  document.getElementById('search-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') runSearch();
+  });
+
+  /* ── ARTICLE MODAL ───────────────────────────────────────────── */
+  const articles = {
+    hero:  { tag:'AO VIVO', title:'Brasil domina e vence Argentina por 2 a 1 nas Eliminatórias', img:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80', meta:'Há 15 min · Eliminatórias da Copa do Mundo', t1:'O Brasil confirmou sua supremacia sobre a Argentina em uma partida emocionante pelas Eliminatórias da Copa do Mundo 2026. Vinicius Jr. foi o grande destaque, marcando dois gols no segundo tempo e confirmando sua condição de melhor jogador do mundo na atualidade.', t2:'A vitória coloca a Seleção Brasileira com seis pontos de vantagem na liderança, praticamente garantindo a classificação para o Mundial dos EUA, Canadá e México. Carlo Ancelotti elogiou o desempenho coletivo da equipe.'},
+    side1: { tag:'Champions', title:'Real Madrid e PSG empatam em 1 a 1 nas oitavas da Champions League', img:'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80', meta:'Há 1h · UEFA Champions League', t1:'O Santiago Bernabéu foi palco de um duelo equilibrado entre Real Madrid e PSG pelas oitavas de final da Champions League. Mbappé, em sua emocionante volta ao Parc des Princes como visitante, foi vaiado pela torcida parisiense.', t2:'O empate em 1 a 1 deixa tudo em aberto para a partida de volta na França. O técnico do Real, Carlo Ancelotti, disse que o time está em boa posição para avançar às quartas de final.'},
+    side2: { tag:'Copa do Brasil', title:'Corinthians vira sobre o São Paulo e avança às semifinais da Copa do Brasil', img:'https://images.unsplash.com/photo-1551958219-acbc608c6377?w=900&q=80', meta:'Há 7h · Copa do Brasil', t1:'Em uma noite histórica na Neo Química Arena, o Corinthians virou sobre o São Paulo por 3 a 2 e garantiu sua vaga nas semifinais da Copa do Brasil. Yuri Alberto foi o herói do jogo, marcando dois gols decisivos.', t2:'A Fiel Torcida celebrou a classificação em êxtase. O adversário nas semifinais será definido na próxima semana, com Flamengo e Palmeiras disputando a outra vaga.'},
+    n1:    { tag:'Brasileirão', title:'Palmeiras goleia Atlético-MG por 4 a 0 e dispara na liderança', img:'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80', meta:'Há 2h · Brasileirão Série A', t1:'O Palmeiras mostrou toda a sua força no Allianz Parque ao golear o Atlético Mineiro por 4 a 0, abrindo seis pontos de vantagem na liderança do Brasileirão Série A. Estêvão, de 17 anos, foi o grande destaque com dois gols e uma assistência.', t2:'Abel Ferreira exaltou o desempenho coletivo: "Quando todos jogam juntos, o Palmeiras é muito difícil de bater." O próximo desafio do Verdão será fora de casa diante do Internacional.'},
+    n2:    { tag:'Seleção', title:'Endrick é convocado e deve ser titular no amistoso contra o Marrocos', img:'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&q=80', meta:'Há 5h · Seleção Brasileira', t1:'Carlo Ancelotti anunciou a convocação de Endrick para os próximos amistosos da Seleção Brasileira. O centroavante do Real Madrid vive boa fase e deve ganhar uma oportunidade como titular frente ao Marrocos.', t2:'Endrick, de apenas 19 anos, tem se destacado no Real Madrid e acumula 11 gols na temporada. O técnico italiano ressaltou que o jovem atacante tem maturidade para assumir a responsabilidade da camisa 9 canarinha.'},
+    n3:    { tag:'La Liga', title:'Barcelona renova contrato com Lamine Yamal até 2030', img:'https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=900&q=80', meta:'Há 3h · FC Barcelona', t1:'O FC Barcelona anunciou a renovação de contrato com Lamine Yamal até 2030, com uma cláusula de rescisão de impressionantes €1 bilhão. O acordo inclui um aumento salarial significativo para o jovem de 17 anos.', t2:'Yamal, que já é considerado um dos melhores do mundo, tem sido fundamental para o Barcelona nesta temporada, com 19 gols e 21 assistências em 44 partidas. A renovação foi comemorada por torcedores e dirigentes do clube catalão.'},
+    n4:    { tag:'Transferências', title:'Manchester United negocia contratação de Kvaratskhelia por €80 mi', img:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=900&q=80', meta:'Há 4h · Mercado da Bola', t1:'O Manchester United fez uma proposta oficial de €80 milhões pelo atacante georgiano Khvicha Kvaratskhelia ao Napoli. O clube italiano, no entanto, teria recusado a oferta inicial por considerá-la abaixo do valor do jogador.', t2:'Fontes próximas às negociações indicam que o Napoli exige pelo menos €100 milhões pelo georgianos. O Manchester United, sob o novo comando técnico, busca reforçar o setor ofensivo para a próxima temporada.'},
+    n5:    { tag:'Copa do Mundo', title:'FIFA revela sedes dos grupos para a Copa do Mundo 2026', img:'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80', meta:'Há 8h · FIFA', t1:'A FIFA revelou as sedes que receberão as fases de grupo da Copa do Mundo de 2026, distribuídas entre Estados Unidos, México e Canadá. O sorteio dos grupos será realizado em Las Vegas em setembro de 2025.', t2:'O Brasil foi colocado no Pote 1 do sorteio por conta de sua liderança nas Eliminatórias Sul-Americanas. A Copa contará com 48 seleções pela primeira vez na história, tornando o torneio o maior já realizado.'},
+  };
+
+  function openArticle(id) {
+    const a = articles[id];
+    if (!a) return;
+    document.getElementById('modal-tag').textContent   = a.tag;
+    document.getElementById('modal-title').textContent = a.title;
+    document.getElementById('modal-img').src           = a.img;
+    document.getElementById('modal-meta').textContent  = a.meta;
+    document.getElementById('modal-text1').textContent = a.t1;
+    document.getElementById('modal-text2').textContent = a.t2;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (e && e.target !== document.getElementById('modal-overlay') && !e.currentTarget.classList.contains('modal-close')) {
+      // clicked inside modal card but not on close — do nothing
+    }
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay background click
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
