@@ -232,6 +232,155 @@
 
     .nav-search-btn:hover { opacity: 1; }
 
+    /* ─── LOGIN BUTTON & AUTH MODAL ─────────────────────────────── */
+    .nav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+
+    .nav-login-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--white);
+      cursor: pointer;
+      padding: 0 16px;
+      height: 34px;
+      border-radius: 17px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: background .2s, border-color .2s;
+    }
+    .nav-login-btn:hover { background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.4); }
+
+    .nav-user-wrap {
+      display: none; align-items: center; gap: 8px;
+      cursor: pointer; position: relative;
+    }
+    .nav-user-wrap.visible { display: flex; }
+
+    .nav-avatar {
+      width: 32px; height: 32px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px; font-weight: 800; color: #fff;
+    }
+    .nav-user-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px; font-weight: 700;
+      color: var(--white); max-width: 100px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .nav-logout-btn {
+      background: none; border: 1px solid rgba(255,255,255,.15);
+      color: #aaa; padding: 4px 10px; border-radius: 4px;
+      font-size: 11px; cursor: pointer; transition: all .2s;
+    }
+    .nav-logout-btn:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+    /* Auth Modal */
+    #auth-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.82); z-index: 2000;
+      align-items: center; justify-content: center;
+    }
+    #auth-modal.open { display: flex; }
+
+    .auth-wrap { position: relative; width: 100%; max-width: 420px; }
+
+    .auth-card {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .auth-close-btn {
+      position: absolute; top: -40px; right: 0;
+      background: none; border: none;
+      color: #888; font-size: 28px; cursor: pointer;
+      transition: color .2s; line-height: 1;
+    }
+    .auth-close-btn:hover { color: #fff; }
+
+    .auth-tabs { display: flex; border-bottom: 1px solid var(--border); }
+    .auth-tab {
+      flex: 1; background: none; border: none;
+      color: #666;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      padding: 15px; cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .auth-tab.active { color: var(--white); border-bottom-color: var(--red); }
+
+    .auth-panel { display: none; padding: 28px; }
+    .auth-panel.active { display: block; }
+
+    .auth-logo {
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px; font-weight: 800;
+      color: var(--white); margin-bottom: 22px;
+    }
+    .auth-logo em { color: var(--red); font-style: normal; }
+
+    .auth-field { margin-bottom: 14px; }
+    .auth-field label {
+      display: block; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: #555; margin-bottom: 5px;
+    }
+    .auth-field input {
+      width: 100%; background: #0d0d0d;
+      border: 1px solid var(--border); color: var(--white);
+      padding: 11px 14px; font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      border-radius: 5px; outline: none;
+      transition: border-color .2s;
+    }
+    .auth-field input:focus { border-color: var(--red); }
+    .auth-field input::placeholder { color: #3a3a3a; }
+
+    .auth-submit {
+      width: 100%; background: var(--red);
+      border: none; color: #fff;
+      padding: 12px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      border-radius: 5px; cursor: pointer; margin-top: 6px;
+      transition: background .2s;
+    }
+    .auth-submit:hover { background: var(--red-dark); }
+
+    .auth-or {
+      text-align: center; color: #3a3a3a;
+      font-size: 12px; margin: 14px 0;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .auth-or::before, .auth-or::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .auth-google {
+      width: 100%; background: #fff; border: none; color: #222;
+      padding: 11px; font-size: 14px; font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      border-radius: 5px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      transition: background .2s;
+    }
+    .auth-google:hover { background: #e8e8e8; }
+
+    .auth-hint {
+      text-align: center; font-size: 12px; color: #444; margin-top: 16px;
+    }
+    .auth-hint a { color: var(--red); cursor: pointer; text-decoration: none; }
+    .auth-hint a:hover { text-decoration: underline; }
+
     /* ─── SECTIONS ───────────────────────────────────────────────── */
     .page { display: none; padding: 32px 0 48px; }
     .page.active { display: block; }
@@ -612,6 +761,14 @@
       justify-content: center;
       min-height: 220px;
       font-size: 60px;
+      overflow: hidden;
+    }
+
+    .player-photo img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
     }
 
     .player-info { padding: 24px; border-right: 1px solid var(--border); }
@@ -931,52 +1088,66 @@
         <div class="scores-track" id="scores-track">
 
           <div class="score-card">
-            <span class="tag live">● VIVO</span>
-            <span class="score-teams">Brasil <b>vs</b> Argentina</span>
-            <span class="score-result">2 – 1</span>
-            <span class="score-info">67' • 2º Tempo • Eliminatórias</span>
-          </div>
-
-          <div class="score-card">
-            <span class="tag live">● VIVO</span>
-            <span class="score-teams">Real Madrid <b>vs</b> PSG</span>
+            <span class="tag" style="background:#2a5a2a">FINAL</span>
+            <span class="score-teams">Brasil <b>vs</b> Marrocos</span>
             <span class="score-result">1 – 1</span>
-            <span class="score-info">51' • 2º Tempo • Champions League</span>
-          </div>
-
-          <div class="score-card">
-            <span class="tag live">● VIVO</span>
-            <span class="score-teams">Flamengo <b>vs</b> Palmeiras</span>
-            <span class="score-result">0 – 0</span>
-            <span class="score-info">23' • 1º Tempo • Brasileirão Série A</span>
-          </div>
-
-          <div class="score-card">
-            <span class="tag" style="background:#444">HOJE</span>
-            <span class="score-teams">Bayern <b>vs</b> Dortmund</span>
-            <span class="score-result" style="font-size:13px;color:#888">18:30</span>
-            <span class="score-info">Bundesliga</span>
-          </div>
-
-          <div class="score-card">
-            <span class="tag" style="background:#444">HOJE</span>
-            <span class="score-teams">Portugal <b>vs</b> Espanha</span>
-            <span class="score-result" style="font-size:13px;color:#888">20:45</span>
-            <span class="score-info">UEFA Nations League</span>
-          </div>
-
-          <div class="score-card">
-            <span class="tag" style="background:#444">HOJE</span>
-            <span class="score-teams">Manchester City <b>vs</b> Arsenal</span>
-            <span class="score-result" style="font-size:13px;color:#888">17:00</span>
-            <span class="score-info">Premier League</span>
+            <span class="score-info">13 jun • Grupo C • Copa do Mundo 2026</span>
           </div>
 
           <div class="score-card">
             <span class="tag" style="background:#2a5a2a">FINAL</span>
-            <span class="score-teams">Corinthians <b>vs</b> São Paulo</span>
-            <span class="score-result">3 – 2</span>
-            <span class="score-info">Copa do Brasil</span>
+            <span class="score-teams">México <b>vs</b> África do Sul</span>
+            <span class="score-result">2 – 0</span>
+            <span class="score-info">11 jun • Grupo A • Copa do Mundo 2026</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#2a5a2a">FINAL</span>
+            <span class="score-teams">Canadá <b>vs</b> Bósnia</span>
+            <span class="score-result">1 – 1</span>
+            <span class="score-info">11 jun • Grupo B • Copa do Mundo 2026</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#2a5a2a">FINAL</span>
+            <span class="score-teams">EUA <b>vs</b> Paraguai</span>
+            <span class="score-result">4 – 1</span>
+            <span class="score-info">12 jun • Grupo D • Copa do Mundo 2026</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#2a5a2a">Final</span>
+            <span class="score-teams">Haiti <b>vs</b> Escócia</span>
+            <span class="score-result">0 – 1</span>
+            <span class="score-info">Grupo C • Copa do Mundo 2026</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#2a5a2a">Final</span>
+            <span class="score-teams">Alemanha <b>vs</b> Curaçau</span>
+            <span class="score-result">7 – 1</span>
+            <span class="score-info">Grupo E • Copa do Mundo 2026</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#444">Hoje</span>
+            <span class="score-teams">França <b>vs</b> Senegal</span>
+            <span class="score-result" style="font-size:13px;color:#888">16:00</span>
+            <span class="score-info">Grupo I • Copa do Mundo 2026</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag" style="background:#444">HOJE</span>
+            <span class="score-teams">Argentina <b>vs</b> Argélia</span>
+            <span class="score-result" style="font-size:13px;color:#888">02:00</span>
+            <span class="score-info">Grupo G • Copa do Mundo 2026</span>
+          </div>
+
+          <div class="score-card">
+            <span class="tag live">● FINALS</span>
+            <span class="score-teams">Knicks <b>vs</b> Spurs</span>
+            <span class="score-result">J5 • Série 1-4</span>
+            <span class="score-info">NBA Finals 2026</span>
           </div>
 
         </div>
@@ -1001,7 +1172,20 @@
       <button class="nav-btn" data-page="esportes">Esportes</button>
       <button class="nav-btn" data-page="pesquisa">Pesquisa</button>
     </nav>
-    <button class="nav-search-btn" onclick="goToSearch()" title="Pesquisar">&#128269;</button>
+    <div class="nav-right">
+      <button class="nav-search-btn" onclick="goToSearch()" title="Pesquisar">&#128269;</button>
+      <!-- Login button (shown when logged out) -->
+      <button class="nav-login-btn" id="nav-login-btn" onclick="openAuthModal('login')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Entrar
+      </button>
+      <!-- User chip (shown when logged in) -->
+      <div class="nav-user-wrap" id="nav-user-wrap">
+        <div class="nav-avatar" id="nav-avatar">?</div>
+        <span class="nav-user-name" id="nav-user-name"></span>
+        <button class="nav-logout-btn" onclick="logout()">Sair</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1014,25 +1198,25 @@
     <!-- Hero -->
     <div class="hero-grid" style="margin-bottom:36px;">
       <div class="hero-main" onclick="openArticle('hero')">
-        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80" alt="Brasil vs Argentina" />
+        <img src="https://litoralnarede.com.br/wp-content/uploads/2026/06/13062026-BRASIL-MARROCOS-COPA-DO-MUNDO-2026-768x471.jpg" alt="Brasil vs Marrocos Copa 2026" />
         <div class="overlay">
-          <span class="tag live">● AO VIVO</span>
-          <h2>Brasil domina e vence Argentina por 2 a 1 nas Eliminatórias da Copa do Mundo</h2>
-          <p>Vinicius Jr. brilhou com dois gols no segundo tempo. Confira o resumo completo da partida.</p>
+          <span class="tag" style="background:#2a5a2a">COPA DO MUNDO 2026</span>
+          <h2>Brasil empata com Marrocos em 1 a 1 na estreia da Copa do Mundo 2026</h2>
+          <p>Vini Jr. salvou com golaço no 2º tempo. Seleção tem 1 ponto e enfrenta o Haiti em 19 de junho.</p>
         </div>
       </div>
       <div class="hero-side" onclick="openArticle('side1')">
-        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&q=80" alt="Champions League" />
+        <img src="https://images.impresa.pt/olimpia/2026-05-19-gettyimages-2276995931.jpg-e9c5e178/original" />
         <div class="overlay">
-          <span class="tag">Champions</span>
-          <h3>Real Madrid e PSG empatam em 1 a 1 na ida das oitavas</h3>
+          <span class="tag">Premier League</span>
+          <h3>Arsenal campeão inglês: Gunners encerram jejum de 22 anos com título da Premier League</h3>
         </div>
       </div>
       <div class="hero-side" onclick="openArticle('side2')">
-        <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=500&q=80" alt="Copa do Brasil" />
+        <img src="https://a.espncdn.com/photo/2026/0510/r1656467_961x541_16-9.jpg" alt="Copa do Brasil" />
         <div class="overlay">
-          <span class="tag">Copa do Brasil</span>
-          <h3>Corinthians vira sobre o São Paulo e avança às semifinais</h3>
+          <span class="tag">Brasileirão</span>
+          <h3>Corinthians vira sobre o São Paulo e garante 3 pontos no Brasileirão</h3>
         </div>
       </div>
     </div>
@@ -1045,47 +1229,47 @@
         <div class="news-list">
 
           <div class="news-item" onclick="openArticle('n1')">
-            <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=300&q=80" alt="" />
+            <img src="https://s2-cbn.glbimg.com/m8Qpr64llafulK33jBmI0QcX_BM=/0x0:955x565/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_d975fad146a14bbfad9e763717b09688/internal_photos/bs/2026/s/b/6m8Kv0TAOPQ4BlbAWnKQ/palmeiras.png" alt="" />
             <div class="news-item-body">
               <span class="tag">Brasileirão</span>
-              <h4>Palmeiras goleia o Atlético-MG por 4 a 0 e assume liderança</h4>
-              <p>15 min atrás • Brasileirão Série A</p>
+              <h4>Palmeiras lidera o Brasileirão com 41 pts após 18 rodadas</h4>
+              <p>3 dias atrás • Brasileirão Série A</p>
             </div>
           </div>
 
           <div class="news-item" onclick="openArticle('n2')">
-            <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=300&q=80" alt="" />
+            <img src="https://f.i.uol.com.br/fotografia/2026/06/13/17813709746a2d905e65470_1781370974_3x2_md.jpg" alt="" />
             <div class="news-item-body">
-              <span class="tag">Seleção</span>
-              <h4>Endrick é convocado por Ancelotti e deve estrear no amistoso contra o Marrocos</h4>
-              <p>1 hora atrás • Seleção Brasileira</p>
+              <span class="tag">Copa do Mundo</span>
+              <h4>Ancelotti cobra melhora do Brasil após empate com Marrocos na Copa</h4>
+              <p>Ontem • Seleção Brasileira</p>
             </div>
           </div>
 
           <div class="news-item" onclick="openArticle('n3')">
-            <img src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=300&q=80" alt="" />
+            <img src="https://pbs.twimg.com/media/HKD2NzKWoAAhoXo.jpg" alt="" />
             <div class="news-item-body">
               <span class="tag">La Liga</span>
-              <h4>Barcelona anuncia renovação de contrato com Lamine Yamal até 2030</h4>
-              <p>2 horas atrás • La Liga</p>
+              <h4>Barcelona campeão da La Liga 2025/26 com Lamine Yamal como destaque</h4>
+              <p>2 semanas atrás • La Liga</p>
             </div>
           </div>
 
           <div class="news-item" onclick="openArticle('n4')">
-            <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=300&q=80" alt="" />
+            <img src="https://assets.goal.com/images/v3/blt3914313eb4ae279c/Summer%20window%20stars.jpg?auto=webp&format=pjpg&width=3840&quality=60" alt="" />
             <div class="news-item-body">
-              <span class="tag">Transfer</span>
-              <h4>Transferências: Manchester United negocia com atacante do Napoli por €80 milhões</h4>
-              <p>3 horas atrás • Mercado da Bola</p>
+              <span class="tag">Transferências</span>
+              <h4>Mercado da bola: os maiores rumores do futebol mundial em junho 2026</h4>
+              <p>3 dias atrás • Mercado da Bola</p>
             </div>
           </div>
 
           <div class="news-item" onclick="openArticle('n5')">
-            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=300&q=80" alt="" />
+            <img src="https://img.band.com.br/image/2025/12/06/tabela-da-copa-do-mundo-de-2026-15828.jpg" alt="" />
             <div class="news-item-body">
               <span class="tag">Copa</span>
-              <h4>FIFA revela sedes dos grupos para a Copa do Mundo 2026</h4>
-              <p>5 horas atrás • Copa do Mundo</p>
+              <h4>Agenda da Copa 2026: jogos de hoje, domingo 15 de junho</h4>
+              <p>Hoje • Copa do Mundo 2026</p>
             </div>
           </div>
 
@@ -1114,12 +1298,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Palmeiras</td><td>18</td><td>12</td><td>4</td><td>2</td><td class="pts-col">40</td></tr>
-              <tr><td>2</td><td>Flamengo</td><td>18</td><td>11</td><td>3</td><td>4</td><td class="pts-col">36</td></tr>
-              <tr><td>3</td><td>Corinthians</td><td>18</td><td>10</td><td>5</td><td>3</td><td class="pts-col">35</td></tr>
-              <tr><td>4</td><td>Atlético-MG</td><td>18</td><td>10</td><td>2</td><td>6</td><td class="pts-col">32</td></tr>
-              <tr><td>5</td><td>Internacional</td><td>18</td><td>9</td><td>4</td><td>5</td><td class="pts-col">31</td></tr>
-              <tr><td>6</td><td>São Paulo</td><td>18</td><td>8</td><td>5</td><td>5</td><td class="pts-col">29</td></tr>
+              <tr><td>1</td><td>Palmeiras</td><td>18</td><td>12</td><td>5</td><td>1</td><td class="pts-col">41</td></tr>
+              <tr><td>2</td><td>Flamengo</td><td>17</td><td>10</td><td>4</td><td>3</td><td class="pts-col">34</td></tr>
+              <tr><td>3</td><td>Fluminense</td><td>18</td><td>9</td><td>4</td><td>5</td><td class="pts-col">31</td></tr>
+              <tr><td>4</td><td>Athletico-PR</td><td>18</td><td>9</td><td>3</td><td>6</td><td class="pts-col">30</td></tr>
+              <tr><td>5</td><td>RB Bragantino</td><td>18</td><td>9</td><td>2</td><td>7</td><td class="pts-col">29</td></tr>
+              <tr><td>6</td><td>Bahia</td><td>17</td><td>7</td><td>5</td><td>5</td><td class="pts-col">26</td></tr>
             </tbody>
           </table>
         </div>
@@ -1127,11 +1311,11 @@
         <!-- Quick links -->
         <div class="quick-links">
           <div class="quick-links-header">Competições em Destaque</div>
-          <a href="#" onclick="goToSport('ucl');return false;">Champions League <span>›</span></a>
-          <a href="#" onclick="goToSport('br');return false;">Brasileirão Série A <span>›</span></a>
-          <a href="#" onclick="goToSport('laliga');return false;">La Liga <span>›</span></a>
-          <a href="#" onclick="goToSport('pl');return false;">Premier League <span>›</span></a>
-          <a href="#" onclick="switchPage('noticias');return false;">Copa do Brasil <span>›</span></a>
+          <a href="#" onclick="goToNews('selecao');return false;">Copa do Mundo 2026 <span>›</span></a>
+          <a href="#" onclick="goToNews('brasileirao');return false;">Brasileirão Série A <span>›</span></a>
+          <a href="#" onclick="goToNews('copabrasil');return false;">Copa do Brasil <span>›</span></a>
+          <a href="#" onclick="goToNews('champions');return false;">Champions League <span>›</span></a>
+          <a href="#" onclick="goToNews('laliga');return false;">La Liga <span>›</span></a>
         </div>
 
       </div>
@@ -1148,8 +1332,9 @@
     <div class="section-title" style="margin-bottom:20px">Todas as Notícias</div>
     <div class="news-filter-bar">
       <button class="filter-btn active" data-filter="all">Tudo</button>
-      <button class="filter-btn" data-filter="selecao">Seleção</button>
+      <button class="filter-btn" data-filter="selecao">Seleção / Mundial</button>
       <button class="filter-btn" data-filter="brasileirao">Brasileirão</button>
+      <button class="filter-btn" data-filter="copabrasil">Copa do Brasil</button>
       <button class="filter-btn" data-filter="champions">Champions</button>
       <button class="filter-btn" data-filter="laliga">La Liga</button>
       <button class="filter-btn" data-filter="premier">Premier League</button>
@@ -1158,95 +1343,165 @@
 
     <div class="news-grid" id="news-grid">
 
+      <!-- SELEÇÃO / COPA DO MUNDO -->
       <div class="news-card" data-cat="selecao" onclick="openArticle('nc1')">
-        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80" alt="" />
+        <img src="https://litoralnarede.com.br/wp-content/uploads/2026/06/13062026-BRASIL-MARROCOS-COPA-DO-MUNDO-2026-768x471.jpg" alt="" />
         <div class="news-card-body">
-          <span class="tag">Seleção</span>
-          <h3>Brasil vence Argentina e abre 6 pontos na liderança das Eliminatórias</h3>
-          <p>Com dois gols de Vinicius Jr. e assistência de Rodrygo, a Canarinho mostrou evolução tática sob Ancelotti.</p>
-          <div class="news-card-meta">Há 15 min · Sport Center</div>
+          <span class="tag">Copa do Mundo 2026</span>
+          <h3>Brasil empata com Marrocos em 1 a 1 na estreia da Copa do Mundo 2026</h3>
+          <p>Saibari abriu o placar, Vini Jr. respondeu com golaço. Seleção divide 2º lugar do Grupo C com Marrocos.</p>
+          <div class="news-card-meta">Ontem · 13 jun 2026</div>
         </div>
       </div>
 
-      <div class="news-card" data-cat="champions" onclick="openArticle('nc2')">
-        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80" alt="" />
+      <div class="news-card" data-cat="selecao" onclick="openArticle('nc2')">
+        <img src="https://f.i.uol.com.br/fotografia/2026/06/13/17813709746a2d905e65470_1781370974_3x2_md.jpg" alt="" />
         <div class="news-card-body">
-          <span class="tag">Champions</span>
-          <h3>Real Madrid x PSG: análise tática do empate em Madrid</h3>
-          <p>Mbappé voltou ao Parque dos Príncipes como visitante e foi vaiado por torcedores do PSG.</p>
-          <div class="news-card-meta">Há 1h · Sport Center</div>
+          <span class="tag">Copa do Mundo 2026</span>
+          <h3>Ancelotti admite início abaixo e cobra mais do Brasil: "Temos que melhorar"</h3>
+          <p>Técnico reconheceu domínio marroquino no 1º tempo e exigiu mais controle na próxima partida.</p>
+          <div class="news-card-meta">Ontem · 13 jun 2026</div>
         </div>
       </div>
 
-      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc3')">
-        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=600&q=80" alt="" />
+      <div class="news-card" data-cat="selecao" onclick="openArticle('nc3')">
+        <img src="https://midia.gruposinos.com.br/_midias/jpg/2026/06/15/800x500/1_padrao_five__1920x1200____2026_06_15t165607_255-22799698.jpg" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Copa do Mundo 2026</span>
+          <h3>Brasil x Haiti: próximo jogo da Seleção é na sexta-feira (19) na Filadélfia</h3>
+          <p>Com 1 ponto, vitória é obrigatória para o Brasil manter chances de classificação direta no Grupo C.</p>
+          <div class="news-card-meta">Hoje · 15 jun 2026</div>
+        </div>
+      </div>
+
+      <!-- BRASILEIRÃO -->
+      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc_br1')">
+        <img src="https://s2-cbn.glbimg.com/m8Qpr64llafulK33jBmI0QcX_BM=/0x0:955x565/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_d975fad146a14bbfad9e763717b09688/internal_photos/bs/2026/s/b/6m8Kv0TAOPQ4BlbAWnKQ/palmeiras.png" alt="" />
         <div class="news-card-body">
           <span class="tag">Brasileirão</span>
-          <h3>Palmeiras goleia o Atlético-MG por 4 a 0 e dispara na liderança</h3>
-          <p>Estêvão foi o destaque com dois gols e uma assistência no Allianz Parque lotado.</p>
-          <div class="news-card-meta">Há 2h · Sport Center</div>
+          <h3>Palmeiras termina 1º semestre como líder isolado do Brasileirão com campanha sólida</h3>
+          <p>Verdão chega à pausa da Copa do Mundo na ponta e classificado às oitavas da Libertadores e da Copa do Brasil.</p>
+          <div class="news-card-meta">3 dias atrás · 11 jun 2026</div>
         </div>
       </div>
 
-      <div class="news-card" data-cat="laliga" onclick="openArticle('nc4')">
-        <img src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=600&q=80" alt="" />
+      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc_br2')">
+        <img src="https://www.icururupu.com.br/arquivos/noticias/2833/flamengo-vence-o-coritiba-no-maracana-e-encosta-na-lideranca-do-brasileirao.jpg" alt="" />
         <div class="news-card-body">
-          <span class="tag">La Liga</span>
-          <h3>Lamine Yamal renova com o Barcelona e recebe aumento salarial expressivo</h3>
-          <p>O jovem espanhol de 17 anos assinou contrato até 2030 com cláusula de rescisão de €1 bilhão.</p>
-          <div class="news-card-meta">Há 3h · Sport Center</div>
+          <span class="tag">Brasileirão</span>
+          <h3>Flamengo goleia o Coritiba por 3 a 0 no Maracanã e se mantém no G4</h3>
+          <p>Arrascaeta foi o destaque da partida com dois gols. Rubro-negro ocupa a 2ª posição com 34 pontos.</p>
+          <div class="news-card-meta">4 dias atrás · 30 mai 2026</div>
         </div>
       </div>
 
-      <div class="news-card" data-cat="transfer" onclick="openArticle('nc5')">
-        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&q=80" alt="" />
+      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc_br3')">
+        <img src="https://gazetadoparana.com.br/images/20260530222337_big_730x400_16.webp" alt="" />
         <div class="news-card-body">
-          <span class="tag">Transferências</span>
-          <h3>Manchester United faz proposta de €80 mi pelo atacante Khvicha Kvaratskhelia</h3>
-          <p>O Napoli já indicou que precisa de uma oferta superior a €100 milhões para negociar o georgiano.</p>
-          <div class="news-card-meta">Há 4h · Sport Center</div>
+          <span class="tag">Brasileirão</span>
+          <h3>Athletico-PR vence e cola no G4; Corinthians derrota o Grêmio por 3 a 1 fora de casa</h3>
+          <p>18ª rodada do Brasileirão teve goleada do Corinthians e confirmação do CAP entre os primeiros.</p>
+          <div class="news-card-meta">4 dias atrás · 30 mai 2026</div>
         </div>
       </div>
 
-      <div class="news-card" data-cat="selecao" onclick="openArticle('nc6')">
-        <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80" alt="" />
+      <!-- COPA DO BRASIL -->
+      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc6')">
+        <img src="https://a.espncdn.com/photo/2026/0510/r1656467_961x541_16-9.jpg" alt="" />
         <div class="news-card-body">
-          <span class="tag">Seleção</span>
-          <h3>Endrick deve ser titular de Ancelotti no próximo amistoso da Seleção</h3>
-          <p>O centroavante do Real Madrid vive boa fase e deve ganhar oportunidade na equipe principal.</p>
-          <div class="news-card-meta">Há 5h · Sport Center</div>
+          <span class="tag">Brasileirão</span>
+          <h3>Corinthians vira sobre o São Paulo e garante 3 pontos no Brasileirão</h3>
+          <p>Yuri Alberto marcou dois gols decisivos. Fiel Torcida celebrou a virada na Neo Química Arena.</p>
+          <div class="news-card-meta">2 dias atrás · 12 jun 2026</div>
         </div>
       </div>
 
-      <div class="news-card" data-cat="premier" onclick="openArticle('nc7')">
-        <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" alt="" />
-        <div class="news-card-body">
-          <span class="tag">Premier League</span>
-          <h3>Arsenal de Arteta enfrenta o City com vantagem de 3 pontos na tabela</h3>
-          <p>O clássico desta tarde pode definir o rumo do título inglês. Confira as escalações prováveis.</p>
-          <div class="news-card-meta">Há 6h · Sport Center</div>
-        </div>
-      </div>
-
-      <div class="news-card" data-cat="brasileirao" onclick="openArticle('nc8')">
-        <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&q=80" alt="" />
+      <div class="news-card" data-cat="copabrasil" onclick="openArticle('nc9')">
+        <img src="https://s2-ge.glbimg.com/DsmWVfpJfxn96M7aOpTsjPVAzsY=/0x0:2048x1365/984x0/smart/filters:strip_icc()/s.glbimg.com/es/ge/f/original/2016/10/27/trofeu_4IyfvgS.jpg" alt="" />
         <div class="news-card-body">
           <span class="tag">Copa do Brasil</span>
-          <h3>Corinthians vira em cima do São Paulo na Copa e se classifica por 3 a 2</h3>
-          <p>Em noite especial da torcida fiel, o Timão mostrou força emocional para reverter o placar adverso.</p>
-          <div class="news-card-meta">Há 7h · Sport Center</div>
+          <h3>Copa do Brasil Feminina 2026: veja os duelos das oitavas de final</h3>
+          <p>Destaque é o clássico entre Ferroviária e Corinthians; partidas devem ocorrer na semana de 22 de julho</p>
+          <div class="news-card-meta">Hoje · 15 jun 2026</div>
         </div>
       </div>
 
-      <div class="news-card" data-cat="champions" onclick="openArticle('nc9')">
-        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80" alt="" />
+      <!-- CHAMPIONS LEAGUE -->
+      
+      <div class="news-card" data-cat="champions" onclick="openArticle('nc_ch2')">
+        <img src="https://s2-oglobo.glbimg.com/ZlweMWxMh8qhbMzwYEowWFmQwCs=/0x0:4973x3315/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2025/6/Z/VASpIiRbKBOQGDD4wMfQ/112152468-hosts-reshmin-chowdhury-2ndr-and-pedro-pinto-r-deliver-a-speech-during-the-draw-ceremony-f.jpg" alt="" />
         <div class="news-card-body">
-          <span class="tag">Copa do Mundo</span>
-          <h3>FIFA confirma sedes para a Copa do Mundo de 2026 nos EUA, México e Canadá</h3>
-          <p>O sorteio dos grupos será realizado em Las Vegas em setembro de 2025.</p>
-          <div class="news-card-meta">Há 8h · Sport Center</div>
+          <span class="tag">Champions League</span>
+          <h3>UEFA anuncia sorteio da fase de grupos da Champions League 2025/26</h3>
+          <p>Real Madrid, Manchester City, Bayern e PSG já estão no pote 1. Brasil terá representantes nas fases preliminares.</p>
+          <div class="news-card-meta">5 jun 2026 · Champions League 2025/26</div>
         </div>
       </div>
+
+      <!-- LA LIGA -->
+      <div class="news-card" data-cat="laliga" onclick="openArticle('nc_la1')">
+        <img src="https://pbs.twimg.com/media/HKD2NzKWoAAhoXo.jpg" alt="" />
+        <div class="news-card-body">
+          <span class="tag">La Liga</span>
+          <h3>Barcelona campeão da La Liga 2025/26 com Lamine Yamal como grande nome da temporada</h3>
+          <p>Blaugrana conquistaram o título com duas rodadas de antecedência. Yamal terminou com 19 gols e 21 assistências.</p>
+          <div class="news-card-meta">2 semanas atrás · 31 mai 2026</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="laliga" onclick="openArticle('nc_la2')">
+        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/barcelona-real-madrid-laliga-1.jpg?w=419&h=283&crop=0" alt="" />
+        <div class="news-card-body">
+          <span class="tag">La Liga</span>
+          <h3>Real Madrid fecha temporada em 2º lugar e foca na pré-temporada antes da Copa</h3>
+          <p>Mbappé terminou sua 1ª temporada merengue com 22 gols. Clube se prepara para reforçar o elenco no mercado.</p>
+          <div class="news-card-meta">1 semana atrás · 7 jun 2026</div>
+        </div>
+      </div>
+
+      <!-- PREMIER LEAGUE -->
+      <div class="news-card" data-cat="premier" onclick="openArticle('nc_pl1')">
+        <img src="https://images.impresa.pt/olimpia/2026-05-19-gettyimages-2276995931.jpg-e9c5e178/original" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Premier League</span>
+          <h3>Arsenal campeão inglês: Gunners encerram jejum de 22 anos com título da Premier League</h3>
+          <p>Arteta comandou a campanha histórica dos Gunners, que terminaram a temporada com 4 pontos de vantagem sobre o City.</p>
+          <div class="news-card-meta">1 semana atrás · 7 jun 2026</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="premier" onclick="openArticle('nc_pl2')">
+        <img src="https://storage.stwonline.com.br/180graus/media/image_bank/2025/3/foto_4706902139994298244.jpg" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Premier League</span>
+          <h3>Manchester City anuncia reformulação para 2026/27 após temporada decepcionante</h3>
+          <p>Guardiola confirmou que o clube buscará de 4 a 5 reforços na janela de transferências de julho.</p>
+          <div class="news-card-meta">5 dias atrás · 9 jun 2026</div>
+        </div>
+      </div>
+
+      <!-- TRANSFERÊNCIAS -->
+      <div class="news-card" data-cat="transfer" onclick="openArticle('nc_tr1')">
+        <img src="https://assets.goal.com/images/v3/blt3914313eb4ae279c/Summer%20window%20stars.jpg?auto=webp&format=pjpg&width=3840&quality=60" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Transferências</span>
+          <h3>Mercado da bola: veja as principais contratações e rumores do futebol mundial em junho</h3>
+          <p>Com o encerramento das ligas europeias, as negociações esquentam. Confira os rumores mais quentes.</p>
+          <div class="news-card-meta">3 dias atrás · 11 jun 2026</div>
+        </div>
+      </div>
+
+      <div class="news-card" data-cat="transfer" onclick="openArticle('nc_tr2')">
+        <img src="https://lncimg.lance.com.br/uploads/2025/02/AFP__20230909__33UT4D7__v1__HighRes__FblWc2026SamericaQualifiersBraBol-scaled-aspect-ratio-512-320.jpg" alt="" />
+        <div class="news-card-body">
+          <span class="tag">Transferências</span>
+          <h3>Neymar anuncia retorno ao futebol após Copa do Mundo e negocia com clube do Brasil</h3>
+          <p>Camisa 10 da Seleção não descarta voltar à Santos ou ao Flamengo na segunda metade de 2026.</p>
+          <div class="news-card-meta">5 dias atrás · 9 jun 2026</div>
+        </div>
+      </div>
+
+
 
     </div>
   </div>
@@ -1264,6 +1519,8 @@
       <button class="sport-tab" data-sport="basquete">🏀 Basquete</button>
       <button class="sport-tab" data-sport="f1">🏎 Fórmula 1</button>
       <button class="sport-tab" data-sport="mma">🥊 MMA</button>
+      <button class="sport-tab" data-sport="tenis">🎾 Tênis</button>
+      <button class="sport-tab" data-sport="olimpiadas">🏅 Olimpíadas</button>
     </div>
 
     <!-- FUTEBOL -->
@@ -1271,70 +1528,62 @@
       <div class="sport-two-col">
         <div>
           <div class="matches-section">
-            <div class="section-title">Ao Vivo</div>
+            <div class="section-title">Finalizado · Copa do Mundo 2026</div>
             <div class="match-row">
-              <div class="match-status live">● 67'</div>
+              <div class="match-status live">Final'</div>
               <div class="match-teams">
-                <div class="match-team winner">Brasil <span class="score">2</span></div>
-                <div class="match-team">Argentina <span class="score">1</span></div>
+                <div class="match-team winner">Alemanha <span class="score">7</span></div>
+                <div class="match-team">Curaçau <span class="score">1</span></div>
               </div>
-              <div class="match-comp">Eliminatórias<br>2º Tempo</div>
+              <div class="match-comp">Grupo E · 2º Tempo</div>
             </div>
             <div class="match-row">
-              <div class="match-status live">● 51'</div>
+              <div class="match-status live">Final'</div>
               <div class="match-teams">
-                <div class="match-team">Real Madrid <span class="score">1</span></div>
-                <div class="match-team">PSG <span class="score">1</span></div>
+                <div class="match-team winner">Holanda <span class="score">2</span></div>
+                <div class="match-team">Japão <span class="score">2</span></div>
               </div>
-              <div class="match-comp">Champions League<br>2º Tempo</div>
-            </div>
-            <div class="match-row">
-              <div class="match-status live">● 23'</div>
-              <div class="match-teams">
-                <div class="match-team">Flamengo <span class="score">0</span></div>
-                <div class="match-team">Palmeiras <span class="score">0</span></div>
-              </div>
-              <div class="match-comp">Brasileirão<br>1º Tempo</div>
+              <div class="match-comp">Grupo F · 1º Tempo</div>
             </div>
           </div>
 
           <div class="matches-section">
             <div class="section-title">Próximos Jogos</div>
             <div class="match-row">
-              <div class="match-status upcoming">17:00</div>
+              <div class="match-status upcoming">16:00</div>
               <div class="match-teams">
-                <div class="match-team">Manchester City <span class="score" style="font-size:13px;color:#666">—</span></div>
-                <div class="match-team">Arsenal <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">França <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Senegal <span class="score" style="font-size:13px;color:#666">—</span></div>
               </div>
-              <div class="match-comp">Premier League</div>
+              <div class="match-comp">Grupo I · Copa 2026</div>
             </div>
             <div class="match-row">
-              <div class="match-status upcoming">18:30</div>
+              <div class="match-status upcoming">22:00</div>
               <div class="match-teams">
-                <div class="match-team">Bayern Munich <span class="score" style="font-size:13px;color:#666">—</span></div>
-                <div class="match-team">Borussia Dortmund <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Argentina <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Argélia <span class="score" style="font-size:13px;color:#666">—</span></div>
               </div>
-              <div class="match-comp">Bundesliga</div>
+              <div class="match-comp">Grupo J · Copa 2026</div>
             </div>
             <div class="match-row">
-              <div class="match-status upcoming">20:45</div>
+              <div class="match-status upcoming">19 jun</div>
               <div class="match-teams">
-                <div class="match-team">Portugal <span class="score" style="font-size:13px;color:#666">—</span></div>
-                <div class="match-team">Espanha <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Brasil <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team">Haiti <span class="score" style="font-size:13px;color:#666">—</span></div>
               </div>
-              <div class="match-comp">Nations League</div>
+              <div class="match-comp">Grupo C · Copa 2026</div>
             </div>
           </div>
 
           <div class="matches-section">
-            <div class="section-title">Resultados de Ontem</div>
+            <div class="section-title">Resultados </div>
             <div class="match-row">
               <div class="match-status finished">FIM</div>
               <div class="match-teams">
                 <div class="match-team winner">Corinthians <span class="score">3</span></div>
                 <div class="match-team">São Paulo <span class="score">2</span></div>
               </div>
-              <div class="match-comp">Copa do Brasil</div>
+              <div class="match-comp">Brasileirão</div>
             </div>
             <div class="match-row">
               <div class="match-status finished">FIM</div>
@@ -1357,14 +1606,14 @@
 
         <div class="sidebar">
           <div class="standings-widget">
-            <div class="standings-header">Champions League<span style="font-size:11px;color:#888;font-weight:400">Fase de Grupos</span></div>
+            <div class="standings-header">Champions League 2025/26<span style="font-size:11px;color:#888;font-weight:400">Encerrada</span></div>
             <table class="standings-table">
-              <thead><tr><th>#</th><th>Time</th><th>J</th><th>Pts</th></tr></thead>
+              <thead><tr><th>#</th><th>Time</th><th>Resultado</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>Real Madrid</td><td>4</td><td class="pts-col">10</td></tr>
-                <tr><td>2</td><td>Arsenal</td><td>4</td><td class="pts-col">8</td></tr>
-                <tr><td>3</td><td>PSG</td><td>4</td><td class="pts-col">6</td></tr>
-                <tr><td>4</td><td>Bayern</td><td>4</td><td class="pts-col">3</td></tr>
+                <tr style="background:rgba(204,0,0,.08)"><td>🏆</td><td>PSG</td><td class="pts-col">Campeão</td></tr>
+                <tr><td>2º</td><td>Arsenal</td><td class="pts-col">Vice</td></tr>
+                <tr><td>SF</td><td>Atlético de Madrid</td><td class="pts-col">Semi</td></tr>
+                <tr><td>SF</td><td>Bayern</td><td class="pts-col">Semi</td></tr>
               </tbody>
             </table>
           </div>
@@ -1377,42 +1626,83 @@
       <div class="sport-two-col">
         <div>
           <div class="matches-section">
-            <div class="section-title">NBA – Resultados</div>
+            <div class="section-title">🏆 NBA Finals 2026 — Knicks x Spurs</div>
             <div class="match-row">
-              <div class="match-status finished">FIM</div>
+              <div class="match-status" style="color:#f0a500;font-size:11px;">🏆 CAMPEÃO</div>
               <div class="match-teams">
-                <div class="match-team winner">Los Angeles Lakers <span class="score">118</span></div>
-                <div class="match-team">Golden State Warriors <span class="score">107</span></div>
+                <div class="match-team winner">New York Knicks <span class="score">4</span></div>
+                <div class="match-team" style="color:#666">San Antonio Spurs <span class="score">1</span></div>
               </div>
-              <div class="match-comp">NBA</div>
+              <div class="match-comp">Série Final<br>Knicks campeões!</div>
             </div>
             <div class="match-row">
-              <div class="match-status finished">FIM</div>
+              <div class="match-status finished">J5 · 13/06</div>
               <div class="match-teams">
-                <div class="match-team winner">Boston Celtics <span class="score">124</span></div>
-                <div class="match-team">Miami Heat <span class="score">98</span></div>
+                <div class="match-team winner">New York Knicks <span class="score">94</span></div>
+                <div class="match-team">San Antonio Spurs <span class="score">90</span></div>
               </div>
-              <div class="match-comp">NBA</div>
+              <div class="match-comp">NBA Finals<br>Brunson 45 pts</div>
             </div>
             <div class="match-row">
-              <div class="match-status upcoming">22:30</div>
+              <div class="match-status finished">J4 · 11/06</div>
               <div class="match-teams">
-                <div class="match-team">Oklahoma City <span class="score" style="font-size:13px;color:#666">—</span></div>
-                <div class="match-team">Denver Nuggets <span class="score" style="font-size:13px;color:#666">—</span></div>
+                <div class="match-team winner">New York Knicks <span class="score">107</span></div>
+                <div class="match-team">San Antonio Spurs <span class="score">106</span></div>
               </div>
-              <div class="match-comp">NBA – Playoffs</div>
+              <div class="match-comp">NBA Finals<br>Comeback de 29 pts</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">J3 · 08/06</div>
+              <div class="match-teams">
+                <div class="match-team winner">San Antonio Spurs <span class="score">115</span></div>
+                <div class="match-team">New York Knicks <span class="score">111</span></div>
+              </div>
+              <div class="match-comp">NBA Finals<br>Wemby 27 pts</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">J2 · 05/06</div>
+              <div class="match-teams">
+                <div class="match-team winner">New York Knicks <span class="score">105</span></div>
+                <div class="match-team">San Antonio Spurs <span class="score">104</span></div>
+              </div>
+              <div class="match-comp">NBA Finals</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">J1 · 03/06</div>
+              <div class="match-teams">
+                <div class="match-team winner">New York Knicks <span class="score">105</span></div>
+                <div class="match-team">San Antonio Spurs <span class="score">95</span></div>
+              </div>
+              <div class="match-comp">NBA Finals</div>
             </div>
           </div>
         </div>
         <div class="sidebar">
           <div class="standings-widget">
-            <div class="standings-header">NBA – Conferência Leste</div>
+            <div class="standings-header">🏀 Conf. Leste 2025-26 <span style="font-size:10px;color:#666;font-weight:400">Final</span></div>
             <table class="standings-table">
               <thead><tr><th>#</th><th>Time</th><th>V</th><th>D</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>Boston Celtics</td><td>58</td><td class="pts-col">24</td></tr>
-                <tr><td>2</td><td>Milwaukee</td><td>52</td><td class="pts-col">30</td></tr>
-                <tr><td>3</td><td>Miami Heat</td><td>46</td><td class="pts-col">36</td></tr>
+                <tr><td>1</td><td>Detroit Pistons</td><td>60</td><td class="pts-col">22</td></tr>
+                <tr><td>2</td><td>Boston Celtics</td><td>56</td><td class="pts-col">26</td></tr>
+                <tr style="background:rgba(204,0,0,.08)"><td>3</td><td>🏆 NY Knicks</td><td>53</td><td class="pts-col">29</td></tr>
+                <tr><td>4</td><td>Cleveland Cavs</td><td>52</td><td class="pts-col">30</td></tr>
+                <tr><td>5</td><td>Toronto Raptors</td><td>46</td><td class="pts-col">36</td></tr>
+                <tr><td>6</td><td>Atlanta Hawks</td><td>46</td><td class="pts-col">36</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="standings-widget" style="margin-top:14px">
+            <div class="standings-header">🏀 Conf. Oeste 2025-26 <span style="font-size:10px;color:#666;font-weight:400">Final</span></div>
+            <table class="standings-table">
+              <thead><tr><th>#</th><th>Time</th><th>V</th><th>D</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>OKC Thunder</td><td>64</td><td class="pts-col">18</td></tr>
+                <tr style="background:rgba(204,0,0,.08)"><td>2</td><td>SA Spurs</td><td>62</td><td class="pts-col">20</td></tr>
+                <tr><td>3</td><td>Denver Nuggets</td><td>54</td><td class="pts-col">28</td></tr>
+                <tr><td>4</td><td>LA Lakers</td><td>53</td><td class="pts-col">29</td></tr>
+                <tr><td>5</td><td>Houston Rockets</td><td>52</td><td class="pts-col">30</td></tr>
+                <tr><td>6</td><td>Minnesota T-Wolves</td><td>49</td><td class="pts-col">33</td></tr>
               </tbody>
             </table>
           </div>
@@ -1466,8 +1756,151 @@
       </div>
     </div>
 
-    <!-- MMA -->
-    <div id="sport-mma" class="sport-content">
+    <!-- TÊNIS -->
+    <div id="sport-tenis" class="sport-content">
+      <div class="sport-two-col">
+        <div>
+          <div class="matches-section">
+            <div class="section-title">ATP / WTA – Torneios em Andamento</div>
+            <div class="match-row">
+              <div class="match-status live">● VIVO</div>
+              <div class="match-teams">
+                <div class="match-team winner">C. Alcaraz (ESP) <span class="score">6-4, 3</span></div>
+                <div class="match-team">J. Sinner (ITA) <span class="score">2, 2</span></div>
+              </div>
+              <div class="match-comp">Roland Garros<br>Semifinal</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">I. Swiatek (POL) <span class="score">6-3, 6-2</span></div>
+                <div class="match-team" style="color:#666">A. Sabalenka (BLR) <span class="score"></span></div>
+              </div>
+              <div class="match-comp">Roland Garros<br>Semifinal Fem.</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">FIM</div>
+              <div class="match-teams">
+                <div class="match-team winner">N. Djokovic (SRB) <span class="score">7-5, 6-4, 6-3</span></div>
+                <div class="match-team" style="color:#666">H. Hurkacz (POL) <span class="score"></span></div>
+              </div>
+              <div class="match-comp">Roland Garros<br>Quartas</div>
+            </div>
+          </div>
+          <div class="matches-section">
+            <div class="section-title">Próximos Jogos</div>
+            <div class="match-row">
+              <div class="match-status upcoming">Sáb 15/06</div>
+              <div class="match-teams">
+                <div class="match-team">Final Feminina Roland Garros <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">Roland Garros</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status upcoming">Dom 16/06</div>
+              <div class="match-teams">
+                <div class="match-team">Final Masculina Roland Garros <span class="score" style="font-size:13px;color:#666">—</span></div>
+              </div>
+              <div class="match-comp">Roland Garros</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="quick-links">
+            <div class="quick-links-header">🎾 Ranking ATP (Top 5)</div>
+            <a href="#">1. Jannik Sinner (ITA) <span>›</span></a>
+            <a href="#">2. Carlos Alcaraz (ESP) <span>›</span></a>
+            <a href="#">3. Novak Djokovic (SRB) <span>›</span></a>
+            <a href="#">4. Alexander Zverev (ALE) <span>›</span></a>
+            <a href="#">5. Daniil Medvedev (RUS) <span>›</span></a>
+          </div>
+          <div class="quick-links" style="margin-top:16px">
+            <div class="quick-links-header">🎾 Ranking WTA (Top 5)</div>
+            <a href="#">1. Iga Swiatek (POL) <span>›</span></a>
+            <a href="#">2. Aryna Sabalenka (BLR) <span>›</span></a>
+            <a href="#">3. Coco Gauff (EUA) <span>›</span></a>
+            <a href="#">4. Elena Rybakina (KAZ) <span>›</span></a>
+            <a href="#">5. Jessica Pegula (EUA) <span>›</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OLIMPÍADAS -->
+    <div id="sport-olimpiadas" class="sport-content">
+      <div class="sport-two-col">
+        <div>
+          <div class="matches-section">
+            <div class="section-title">🏅 Olimpíadas Los Angeles 2028</div>
+            <div class="match-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div style="font-size:13px;color:#aaa;padding:4px 0;">
+                As Olimpíadas de Los Angeles 2028 acontecerão de <strong style="color:#fff">14 a 30 de julho de 2028</strong> nos Estados Unidos. Será a terceira edição realizada em LA, após 1932 e 1984.
+              </div>
+            </div>
+            <div class="match-row">
+              <div class="match-status" style="color:#e8a020">2028</div>
+              <div class="match-teams">
+                <div class="match-team">🇺🇸 Los Angeles, EUA <span class="score" style="font-size:13px;color:#888">14 – 30 jul</span></div>
+              </div>
+              <div class="match-comp">Jogos Olímpicos</div>
+            </div>
+          </div>
+          <div class="matches-section">
+            <div class="section-title">🥇 Paris 2024 – Quadro de Medalhas Final</div>
+            <div class="match-row">
+              <div class="match-status finished">🥇 1º</div>
+              <div class="match-teams">
+                <div class="match-team winner">🇺🇸 Estados Unidos <span class="score">40 ouros</span></div>
+              </div>
+              <div class="match-comp">126 medalhas<br>Paris 2024</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">🥇 2º</div>
+              <div class="match-teams">
+                <div class="match-team">🇨🇳 China <span class="score">40 ouros</span></div>
+              </div>
+              <div class="match-comp">91 medalhas<br>Paris 2024</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">🥇 3º</div>
+              <div class="match-teams">
+                <div class="match-team">🇬🇧 Grã-Bretanha <span class="score">20 ouros</span></div>
+              </div>
+              <div class="match-comp">65 medalhas<br>Paris 2024</div>
+            </div>
+            <div class="match-row">
+              <div class="match-status finished">🏅 14º</div>
+              <div class="match-teams">
+                <div class="match-team">🇧🇷 Brasil <span class="score">3 ouros</span></div>
+              </div>
+              <div class="match-comp">20 medalhas<br>Paris 2024</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="quick-links">
+            <div class="quick-links-header">🏅 Modalidades do Brasil em LA 2028</div>
+            <a href="#">Atletismo <span>›</span></a>
+            <a href="#">Natação <span>›</span></a>
+            <a href="#">Judô <span>›</span></a>
+            <a href="#">Skate <span>›</span></a>
+            <a href="#">Vôlei / Futebol <span>›</span></a>
+          </div>
+          <div class="standings-widget" style="margin-top:16px">
+            <div class="standings-header">Brasil em Paris 2024</div>
+            <table class="standings-table">
+              <thead><tr><th>Modalidade</th><th>🥇</th><th>🥈</th><th>🥉</th></tr></thead>
+              <tbody>
+                <tr><td>Skate</td><td class="pts-col">1</td><td>0</td><td>1</td></tr>
+                <tr><td>Atletismo</td><td class="pts-col">1</td><td>1</td><td>0</td></tr>
+                <tr><td>Judô</td><td class="pts-col">1</td><td>0</td><td>2</td></tr>
+                <tr><td>Natação</td><td class="pts-col">0</td><td>1</td><td>2</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
       <div class="sport-two-col">
         <div>
           <div class="matches-section">
@@ -1535,8 +1968,8 @@
         <div class="chip" onclick="fillSearch('Endrick')">Endrick</div>
         <div class="chip" onclick="fillSearch('Flamengo')">Flamengo</div>
         <div class="chip" onclick="fillSearch('Palmeiras')">Palmeiras</div>
-        <div class="chip" onclick="fillSearch('Champions League')">Champions League</div>
-        <div class="chip" onclick="fillSearch('Copa do Mundo 2026')">Copa do Mundo 2026</div>
+        <div class="chip" onclick="goToNews('champions')">Champions League</div>
+        <div class="chip" onclick="goToNews('all')">Copa do Mundo 2026</div>
       </div>
     </div>
 
@@ -1547,7 +1980,9 @@
         <h3 id="result-name">—</h3>
       </div>
       <div class="player-body">
-        <div class="player-photo" id="result-emoji">⚽</div>
+        <div class="player-photo" id="result-photo-wrap">
+          <img id="result-photo" src="" alt="" />
+        </div>
         <div class="player-info">
           <h4 id="result-fullname">—</h4>
           <div class="birth" id="result-birth">—</div>
@@ -1626,26 +2061,26 @@
       </div>
       <div class="footer-col">
         <h4>Futebol</h4>
-        <a href="#">Seleção Brasileira</a>
-        <a href="#">Brasileirão</a>
-        <a href="#">Champions League</a>
-        <a href="#">Copa do Brasil</a>
-        <a href="#">La Liga</a>
+        <a href="#" onclick="goToNews('selecao');return false;">Copa do Mundo 2026</a>
+        <a href="#" onclick="goToNews('brasileirao');return false;">Brasileirão</a>
+        <a href="#" onclick="goToNews('copabrasil');return false;">Copa do Brasil</a>
+        <a href="#" onclick="goToNews('champions');return false;">Champions League</a>
+        <a href="#" onclick="goToNews('laliga');return false;">La Liga</a>
       </div>
       <div class="footer-col">
         <h4>Outros Esportes</h4>
-        <a href="#">NBA</a>
-        <a href="#">Fórmula 1</a>
-        <a href="#">UFC / MMA</a>
-        <a href="#">Tênis</a>
-        <a href="#">Olimpíadas</a>
+        <a href="#" onclick="goToSportTab('basquete');return false;">NBA</a>
+        <a href="#" onclick="goToSportTab('f1');return false;">Fórmula 1</a>
+        <a href="#" onclick="goToSportTab('mma');return false;">UFC / MMA</a>
+        <a href="#" onclick="goToSportTab('tenis');return false;">Tênis</a>
+        <a href="#" onclick="goToSportTab('olimpiadas');return false;">Olimpíadas</a>
       </div>
       <div class="footer-col">
         <h4>Sport Center</h4>
-        <a href="#">Sobre nós</a>
-        <a href="#">Contato</a>
-        <a href="#">Política de privacidade</a>
-        <a href="#">Termos de uso</a>
+        <a href="#" onclick="switchPage('home');return false;">Home</a>
+        <a href="#" onclick="goToNews('all');return false;">Todas as Notícias</a>
+        <a href="#" onclick="goToSearch();return false;">Pesquisar</a>
+        <a href="#" onclick="switchPage('esportes');return false;">Esportes</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1654,6 +2089,78 @@
     </div>
   </div>
 </footer>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- AUTH MODAL (Login / Cadastro)                                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="auth-modal" onclick="authOverlayClick(event)">
+  <div class="auth-wrap">
+    <button class="auth-close-btn" onclick="closeAuthModal()">&#x2715;</button>
+    <div class="auth-card">
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Entrar</button>
+        <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Criar Conta</button>
+      </div>
+
+      <!-- LOGIN PANEL -->
+      <div class="auth-panel active" id="panel-login">
+        <div class="auth-logo">Sport<em>Center</em></div>
+
+        <div class="auth-field">
+          <label>E-mail</label>
+          <input type="email" id="login-email" placeholder="seu@email.com" />
+        </div>
+        <div class="auth-field">
+          <label>Senha</label>
+          <input type="password" id="login-pass" placeholder="••••••••" />
+        </div>
+
+        <button class="auth-submit" onclick="doLogin()">Entrar</button>
+
+        <div class="auth-or">ou</div>
+
+        <button class="auth-google" onclick="doGoogleLogin()">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.2 0 5.9 1.1 8.1 3l6-6C34.5 3.1 29.6 1 24 1 14.8 1 7 6.7 3.7 14.6l7 5.4C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.4 5.7c4.3-4 6.8-9.9 6.8-16.9z"/><path fill="#FBBC05" d="M10.7 28.6A14.4 14.4 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7-5.4A23.8 23.8 0 0 0 .5 24c0 3.8.9 7.4 2.5 10.6l7.7-6z"/><path fill="#34A853" d="M24 46.5c5.5 0 10.2-1.8 13.6-4.9l-7.4-5.7c-1.9 1.3-4.2 2-6.2 2-6.3 0-11.6-4.1-13.5-9.8l-7.7 6C7.1 41 15 46.5 24 46.5z"/></svg>
+          Continuar com Google
+        </button>
+
+        <div class="auth-hint">Não tem conta? <a onclick="switchAuthTab('register')">Criar conta grátis</a></div>
+      </div>
+
+      <!-- REGISTER PANEL -->
+      <div class="auth-panel" id="panel-register">
+        <div class="auth-logo">Sport<em>Center</em></div>
+
+        <div class="auth-field">
+          <label>Nome</label>
+          <input type="text" id="reg-name" placeholder="Seu nome" />
+        </div>
+        <div class="auth-field">
+          <label>E-mail</label>
+          <input type="email" id="reg-email" placeholder="seu@email.com" />
+        </div>
+        <div class="auth-field">
+          <label>Senha</label>
+          <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" />
+        </div>
+
+        <button class="auth-submit" onclick="doRegister()">Criar Conta</button>
+
+        <div class="auth-or">ou</div>
+
+        <button class="auth-google" onclick="doGoogleLogin()">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.2 0 5.9 1.1 8.1 3l6-6C34.5 3.1 29.6 1 24 1 14.8 1 7 6.7 3.7 14.6l7 5.4C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.4 5.7c4.3-4 6.8-9.9 6.8-16.9z"/><path fill="#FBBC05" d="M10.7 28.6A14.4 14.4 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7-5.4A23.8 23.8 0 0 0 .5 24c0 3.8.9 7.4 2.5 10.6l7.7-6z"/><path fill="#34A853" d="M24 46.5c5.5 0 10.2-1.8 13.6-4.9l-7.4-5.7c-1.9 1.3-4.2 2-6.2 2-6.3 0-11.6-4.1-13.5-9.8l-7.7 6C7.1 41 15 46.5 24 46.5z"/></svg>
+          Continuar com Google
+        </button>
+
+        <div class="auth-hint">Já tem conta? <a onclick="switchAuthTab('login')">Entrar</a></div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- ARTICLE MODAL                                                   -->
@@ -1696,6 +2203,26 @@
     setTimeout(() => document.getElementById('search-input').focus(), 300);
   }
 
+  /* Go to Noticias page and apply a filter category */
+  function goToNews(filter) {
+    switchPage('noticias');
+    // Activate the right filter button
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    const targetBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+    if (targetBtn) targetBtn.classList.add('active');
+    // Show/hide cards
+    document.querySelectorAll('.news-card').forEach(card => {
+      card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+    });
+  }
+
+  /* Go to Esportes page and activate a specific sport tab */
+  function goToSportTab(sport) {
+    switchPage('esportes');
+    activateSportTab(sport);
+  }
+
+  /* Legacy alias kept for any remaining internal calls */
   function goToSport(sportId) {
     switchPage('esportes');
     const tabMap = { ucl: 'futebol', br: 'futebol', laliga: 'futebol', pl: 'futebol' };
@@ -1765,7 +2292,7 @@
   /* ── SEARCH / PLAYER LOOKUP ──────────────────────────────────── */
   const playerDB = {
     'vinicius jr': {
-      emoji: '🇧🇷',
+      photo: 'https://cdn.britannica.com/45/273345-050-7B263FB8/Vinicius-Junior-Real-Madrid-football-soccer-player-UEFA-league-knockout--play-off-against-Manchester-City-2024-25.jpg',
       fullname: 'Vinicius José Paixão de Oliveira Júnior',
       birth: '12 de julho de 2000 · São Gonçalo, RJ',
       type: 'Jogador',
@@ -1784,7 +2311,7 @@
       ]
     },
     'endrick': {
-      emoji: '⭐',
+      photo: 'https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/10/endrick-real-madrid-champions-league-e1727895962399.jpg?w=1200&h=1200&crop=1',
       fullname: 'Endrick Felipe Moreira de Sousa',
       birth: '21 de julho de 2006 · Brasília, DF',
       type: 'Jogador',
@@ -1803,7 +2330,7 @@
       ]
     },
     'flamengo': {
-      emoji: '🔴⚫',
+      photo: 'https://fbi.cults3d.com/uploaders/34498706/illustration-file/dece6c1c-403b-4570-b21e-7d4cde4f1c8b/Captura-de-pantalla-2025-04-14-004519.png',
       fullname: 'Clube de Regatas do Flamengo',
       birth: 'Fundado em 17 de novembro de 1895 · Rio de Janeiro, RJ',
       type: 'Time',
@@ -1822,7 +2349,7 @@
       ]
     },
     'palmeiras': {
-      emoji: '💚',
+      photo: 'https://i.pinimg.com/236x/72/f5/7f/72f57f47b541efdc02d6588cccf16428.jpg',
       fullname: 'Sociedade Esportiva Palmeiras',
       birth: 'Fundado em 26 de agosto de 1914 · São Paulo, SP',
       type: 'Time',
@@ -1841,7 +2368,7 @@
       ]
     },
     'mbappé': {
-      emoji: '🇫🇷',
+      photo: 'https://wallpapers.com/images/hd/kylian-mbappe-outdoor-snapshot-k12392unq5xqzx2p.jpg',
       fullname: 'Kylian Mbappé Lottin',
       birth: '20 de dezembro de 1998 · Bondy, França',
       type: 'Jogador',
@@ -1860,7 +2387,7 @@
       ]
     },
     'lamine yamal': {
-      emoji: '🇪🇸',
+      photo: 'https://midianinja.org/wp-content/uploads/2023/12/01hc2g0msr17zcwmwst4.webp',
       fullname: 'Lamine Yamal Nasraoui Ebana',
       birth: '13 de julho de 2007 · Mataró, Espanha',
       type: 'Jogador',
@@ -1879,7 +2406,7 @@
       ]
     },
     'real madrid': {
-      emoji: '👑',
+      photo: 'https://www.futbox.com/img/v1/226/e5c/26a/256/5119a0064ae5e5c652fd.png',
       fullname: 'Real Madrid Club de Fútbol',
       birth: 'Fundado em 6 de março de 1902 · Madrid, Espanha',
       type: 'Time',
@@ -1889,16 +2416,16 @@
         ['Técnico', 'Carlo Ancelotti'],
         ['Artilheiro', 'Mbappé — 22 gols'],
         ['Estádio', 'Santiago Bernabéu'],
-        ['Champions conquistadas', '15'],
+        ['Champions conquistadas', '16'],
       ],
       news: [
-        ['Real Madrid empata com PSG em 1 a 1 na Champions League', 'Há 1h'],
+        ['Real Madrid campeão da Champions League 2024/25', 'Há 2 semanas'],
         ['Ancelotti confirma Endrick no próximo jogo do Real Madrid', 'Há 4h'],
-        ['Real Madrid prepara proposta de €150 mi por Bellingham II', 'Há 1 dia'],
+        ['Real Madrid prepara nova temporada com foco na Champions', 'Há 1 dia'],
       ]
     },
     'corinthians': {
-      emoji: '⚫⚪',
+      photo: 'https://cdn.meutimao.com.br/_upload/forumtopico/2022/05/26/escudo_um.jpg',
       fullname: 'Sport Club Corinthians Paulista',
       birth: 'Fundado em 1º de setembro de 1910 · São Paulo, SP',
       type: 'Time',
@@ -1945,7 +2472,9 @@
     if (match) {
       document.getElementById('result-type-tag').textContent = match.type;
       document.getElementById('result-name').textContent = raw;
-      document.getElementById('result-emoji').textContent = match.emoji;
+      const photoEl = document.getElementById('result-photo');
+      photoEl.src = match.photo || 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&q=80';
+      photoEl.alt = raw;
       document.getElementById('result-fullname').textContent = match.fullname;
       document.getElementById('result-birth').textContent = match.birth;
 
@@ -1963,8 +2492,8 @@
       resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       resultEl.style.display = 'none';
-      /* Redirect to notícias and filter */
-      switchPage('noticias');
+      /* Redirect to notícias with all results shown */
+      goToNews('all');
     }
   }
 
@@ -1974,14 +2503,42 @@
 
   /* ── ARTICLE MODAL ───────────────────────────────────────────── */
   const articles = {
-    hero:  { tag:'AO VIVO', title:'Brasil domina e vence Argentina por 2 a 1 nas Eliminatórias', img:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80', meta:'Há 15 min · Eliminatórias da Copa do Mundo', t1:'O Brasil confirmou sua supremacia sobre a Argentina em uma partida emocionante pelas Eliminatórias da Copa do Mundo 2026. Vinicius Jr. foi o grande destaque, marcando dois gols no segundo tempo e confirmando sua condição de melhor jogador do mundo na atualidade.', t2:'A vitória coloca a Seleção Brasileira com seis pontos de vantagem na liderança, praticamente garantindo a classificação para o Mundial dos EUA, Canadá e México. Carlo Ancelotti elogiou o desempenho coletivo da equipe.'},
-    side1: { tag:'Champions', title:'Real Madrid e PSG empatam em 1 a 1 nas oitavas da Champions League', img:'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80', meta:'Há 1h · UEFA Champions League', t1:'O Santiago Bernabéu foi palco de um duelo equilibrado entre Real Madrid e PSG pelas oitavas de final da Champions League. Mbappé, em sua emocionante volta ao Parc des Princes como visitante, foi vaiado pela torcida parisiense.', t2:'O empate em 1 a 1 deixa tudo em aberto para a partida de volta na França. O técnico do Real, Carlo Ancelotti, disse que o time está em boa posição para avançar às quartas de final.'},
-    side2: { tag:'Copa do Brasil', title:'Corinthians vira sobre o São Paulo e avança às semifinais da Copa do Brasil', img:'https://images.unsplash.com/photo-1551958219-acbc608c6377?w=900&q=80', meta:'Há 7h · Copa do Brasil', t1:'Em uma noite histórica na Neo Química Arena, o Corinthians virou sobre o São Paulo por 3 a 2 e garantiu sua vaga nas semifinais da Copa do Brasil. Yuri Alberto foi o herói do jogo, marcando dois gols decisivos.', t2:'A Fiel Torcida celebrou a classificação em êxtase. O adversário nas semifinais será definido na próxima semana, com Flamengo e Palmeiras disputando a outra vaga.'},
-    n1:    { tag:'Brasileirão', title:'Palmeiras goleia Atlético-MG por 4 a 0 e dispara na liderança', img:'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80', meta:'Há 2h · Brasileirão Série A', t1:'O Palmeiras mostrou toda a sua força no Allianz Parque ao golear o Atlético Mineiro por 4 a 0, abrindo seis pontos de vantagem na liderança do Brasileirão Série A. Estêvão, de 17 anos, foi o grande destaque com dois gols e uma assistência.', t2:'Abel Ferreira exaltou o desempenho coletivo: "Quando todos jogam juntos, o Palmeiras é muito difícil de bater." O próximo desafio do Verdão será fora de casa diante do Internacional.'},
-    n2:    { tag:'Seleção', title:'Endrick é convocado e deve ser titular no amistoso contra o Marrocos', img:'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&q=80', meta:'Há 5h · Seleção Brasileira', t1:'Carlo Ancelotti anunciou a convocação de Endrick para os próximos amistosos da Seleção Brasileira. O centroavante do Real Madrid vive boa fase e deve ganhar uma oportunidade como titular frente ao Marrocos.', t2:'Endrick, de apenas 19 anos, tem se destacado no Real Madrid e acumula 11 gols na temporada. O técnico italiano ressaltou que o jovem atacante tem maturidade para assumir a responsabilidade da camisa 9 canarinha.'},
-    n3:    { tag:'La Liga', title:'Barcelona renova contrato com Lamine Yamal até 2030', img:'https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=900&q=80', meta:'Há 3h · FC Barcelona', t1:'O FC Barcelona anunciou a renovação de contrato com Lamine Yamal até 2030, com uma cláusula de rescisão de impressionantes €1 bilhão. O acordo inclui um aumento salarial significativo para o jovem de 17 anos.', t2:'Yamal, que já é considerado um dos melhores do mundo, tem sido fundamental para o Barcelona nesta temporada, com 19 gols e 21 assistências em 44 partidas. A renovação foi comemorada por torcedores e dirigentes do clube catalão.'},
-    n4:    { tag:'Transferências', title:'Manchester United negocia contratação de Kvaratskhelia por €80 mi', img:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=900&q=80', meta:'Há 4h · Mercado da Bola', t1:'O Manchester United fez uma proposta oficial de €80 milhões pelo atacante georgiano Khvicha Kvaratskhelia ao Napoli. O clube italiano, no entanto, teria recusado a oferta inicial por considerá-la abaixo do valor do jogador.', t2:'Fontes próximas às negociações indicam que o Napoli exige pelo menos €100 milhões pelo georgianos. O Manchester United, sob o novo comando técnico, busca reforçar o setor ofensivo para a próxima temporada.'},
-    n5:    { tag:'Copa do Mundo', title:'FIFA revela sedes dos grupos para a Copa do Mundo 2026', img:'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=900&q=80', meta:'Há 8h · FIFA', t1:'A FIFA revelou as sedes que receberão as fases de grupo da Copa do Mundo de 2026, distribuídas entre Estados Unidos, México e Canadá. O sorteio dos grupos será realizado em Las Vegas em setembro de 2025.', t2:'O Brasil foi colocado no Pote 1 do sorteio por conta de sua liderança nas Eliminatórias Sul-Americanas. A Copa contará com 48 seleções pela primeira vez na história, tornando o torneio o maior já realizado.'},
+    // ── Hero cards (home page)
+    hero:   { tag:'Copa do Mundo 2026', title:'Brasil empata com Marrocos em 1 a 1 na estreia da Copa do Mundo 2026', img:'https://litoralnarede.com.br/wp-content/uploads/2026/06/13062026-BRASIL-MARROCOS-COPA-DO-MUNDO-2026-768x471.jpg', meta:'Ontem · 13 jun 2026 · MetLife Stadium, Nova Jersey', t1:'A Seleção Brasileira estreou com empate de 1 a 1 contra Marrocos pela Copa do Mundo de 2026. Saibari abriu o placar aproveitando erro de Ibañez, mas Vinicius Jr. respondeu com um golaço no segundo tempo para igualar a partida.', t2:'O resultado deixa o Brasil em 2º lugar no Grupo C, empatado com Marrocos. A próxima partida é contra o Haiti na próxima sexta-feira (19) na Filadélfia. Uma vitória é praticamente obrigatória para manter as chances de classificação direta.' },
+    side1:  { tag:'Champions League', title:'Arsenal campeão inglês após 22 anos, com 4 pontos sobre o City', img:'https://images.impresa.pt/olimpia/2026-05-19-gettyimages-2276995931.jpg-e9c5e178/original', meta:'31 mai 2025 · Final da Champions League · Allianz Arena, Munique', t1:'O Arsenal de Mikel Arteta conquistou o título da Premier League 2025/26, encerrando um jejum de 22 anos sem o caneco inglês. Os Gunners terminaram com 89 pontos, 5 à frente do Manchester City.', t2:'Bukayo Saka foi o MVP da temporada para o Arsenal, com 20 gols e 17 assistências. Arteta se emocionou na celebração: "Este grupo merecia. Trabalhamos demais para chegar até aqui."' },
+    side2:  { tag:'Brasileirão', title:'Corinthians vira sobre o São Paulo e garante 3 pontos no Brasileirão', img:'https://a.espncdn.com/photo/2026/0510/r1656467_961x541_16-9.jpg', meta:'10 mai 2026 · Brasileiro', t1:'Em uma noite histórica na Neo Química Arena, o Corinthians virou sobre o São Paulo por 3 a 2 e garantiu 3 pontos importantes na busca pelo titulo do Brasileirão. Yuri Alberto foi o herói do jogo, marcando dois gols decisivos.', t2:'A Fiel Torcida celebrou a virada em êxtase. ' },
+    // ── Home news list
+    n1:     { tag:'Brasileirão', title:'Palmeiras lidera o Brasileirão com 41 pts após 18 rodadas', img:'https://s2-cbn.glbimg.com/m8Qpr64llafulK33jBmI0QcX_BM=/0x0:955x565/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_d975fad146a14bbfad9e763717b09688/internal_photos/bs/2026/s/b/6m8Kv0TAOPQ4BlbAWnKQ/palmeiras.png', meta:'11 jun 2026 · Brasileirão Série A', t1:'O Palmeiras chegou à pausa da Copa do Mundo na liderança isolada do Brasileirão Série A, com 41 pontos após 18 rodadas. Abel Ferreira destaca o equilíbrio do elenco como principal motivo do bom desempenho.', t2:'O Verdão está classificado às oitavas da Libertadores e da Copa do Brasil e tem Estêvão como destaque individual, com 15 gols e 9 assistências na temporada. O campeonato retorna em julho.' },
+    n2:     { tag:'Copa do Mundo', title:'Ancelotti cobra melhora do Brasil após empate com Marrocos na Copa', img:'https://f.i.uol.com.br/fotografia/2026/06/13/17813709746a2d905e65470_1781370974_3x2_md.jpg', meta:'13 jun 2026 · Seleção Brasileira', t1:'Carlo Ancelotti admitiu que o Brasil ficou abaixo do esperado no empate com Marrocos e cobrou evolução para os próximos jogos. O técnico reconheceu que a equipe foi dominada no 1º tempo e que a intensidade e marcação precisam melhorar.', t2:'O Brasil tem 1 ponto no Grupo C e enfrenta o Haiti na sexta-feira (19). Uma vitória é essencial para manter a classificação direta às oitavas de final.' },
+    n3:     { tag:'La Liga', title:'Barcelona campeão da La Liga 2025/26 com Lamine Yamal como destaque', img:'https://pbs.twimg.com/media/HKD2NzKWoAAhoXo.jpg', meta:'31 mai 2026 · La Liga', t1:'O FC Barcelona conquistou o título da La Liga 2025/26 com duas rodadas de antecedência. Lamine Yamal foi o grande nome da temporada, com 19 gols e 21 assistências em 44 partidas pelo clube catalão.', t2:'O Real Madrid terminou em segundo lugar, com Mbappé encerrando sua primeira temporada merengue com 22 gols. O Barcelona já planeja a temporada 2026/27 com foco na Champions League.' },
+    n4:     { tag:'Transferências', title:'Mercado da bola: os maiores rumores do futebol mundial em junho 2026', img:'https://assets.goal.com/images/v3/blt3914313eb4ae279c/Summer%20window%20stars.jpg?auto=webp&format=pjpg&width=3840&quality=60', meta:'11 jun 2026 · Mercado da Bola', t1:'Com o encerramento das principais ligas europeias e a Copa do Mundo em andamento, as negociações no mercado da bola esquentam. Clubes ingleses e sauditas lideram as tratativas por grandes nomes.', t2:'Entre os rumores: Neymar cogita retorno ao Brasil, City busca reforços após temporada decepcionante, e Barcelona negocia renovação de Pedri com nova cláusula de €800 milhões.' },
+    n5:     { tag:'Copa do Mundo', title:'Agenda da Copa 2026: jogos de hoje, domingo 15 de junho', img:'https://img.band.com.br/image/2025/12/06/tabela-da-copa-do-mundo-de-2026-15828.jpg', meta:'Hoje · 15 jun 2026 · Copa do Mundo 2026', t1:'O 5º dia da Copa do Mundo 2026 tem dois jogos na programação: Haiti x Escócia (22h) e Austrália x Turquia (02h do dia 16). O Brasil acompanha de perto para calcular suas chances no Grupo C.', t2:'A Copa do Mundo de 2026 é a maior da história, com 48 seleções divididas em 12 grupos. Os jogos acontecem em 16 cidades dos EUA, México e Canadá. O próximo jogo do Brasil é dia 19 de junho contra o Haiti.' },
+    // ── Noticias grid cards
+    nc1:    { tag:'Copa do Mundo 2026', title:'Brasil 1 x 1 Marrocos: empate frustra estreia da Seleção no Mundial', img:'https://litoralnarede.com.br/wp-content/uploads/2026/06/13062026-BRASIL-MARROCOS-COPA-DO-MUNDO-2026-768x471.jpg', meta:'13 jun 2026 · Grupo C · Copa do Mundo 2026', t1:'A Seleção Brasileira estreou com um decepcionante empate de 1 a 1 contra Marrocos pelo Grupo C da Copa do Mundo 2026. Saibari aproveitou falha de Ibañez para abrir o placar no 1º tempo. Vinicius Jr. empatou com golaço no 2º.', t2:'O resultado gera alerta para a Seleção, que tem 1 ponto e enfrenta Haiti na próxima rodada. Ancelotti admitiu que o time ficou abaixo do esperado e prometeu melhorar.' },
+    nc2:    { tag:'Copa do Mundo 2026', title:'Ancelotti: "Brasil tem que melhorar muito para avançar na Copa"', img:'https://f.i.uol.com.br/fotografia/2026/06/13/17813709746a2d905e65470_1781370974_3x2_md.jpg', meta:'13 jun 2026 · Seleção Brasileira', t1:'Em entrevista pós-jogo, Carlo Ancelotti não poupou críticas ao desempenho do Brasil contra Marrocos. O técnico reconheceu que a equipe foi dominada no 1º tempo e que a intensidade e marcação precisam melhorar urgentemente.', t2:'"Sabemos que temos qualidade. Mas na Copa do Mundo qualidade só não basta. Precisa de intensidade e trabalho coletivo", disse Ancelotti. A Seleção treina segunda-feira antes de se preparar para o jogo contra o Haiti.' },
+    nc3:    { tag:'Copa do Mundo 2026', title:'Brasil x Haiti: o que a Seleção precisa fazer para avançar no Grupo C', img:'https://midia.gruposinos.com.br/_midias/jpg/2026/06/15/800x500/1_padrao_five__1920x1200____2026_06_15t165607_255-22799698.jpg', meta:'Hoje · 15 jun 2026', t1:'Com 1 ponto após o empate com Marrocos, o Brasil precisa vencer o Haiti na próxima sexta-feira (19) no Lincoln Financial Field, na Filadélfia. Uma derrota praticamente elimina a Seleção da classificação direta.', t2:'O Haiti estreou com derrota para a Escócia. Apesar de ser tida como favorita, a Seleção precisará ter uma atuação muito mais coesa do que a vista contra Marrocos para garantir os três pontos.' },
+    nc4:    { tag:'Copa do Mundo 2026', title:'Agenda completa: todos os jogos de hoje na Copa do Mundo 2026', img:'https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=900&q=80', meta:'Hoje · 15 jun 2026 · Copa do Mundo 2026', t1:'O domingo (15) tem dois jogos pela Copa do Mundo 2026. Alemanha x Curaçau abre o dia às 15h, Holanda x Japão às 18h e Haiti x Escócia às 22h. As partidas acontecem em Atlanta, Los Angeles e Nova York.', t2:'A Copa do Mundo conta com 48 seleções pela primeira vez e tem promovido grandes surpresas logo na 1ª rodada. Confira a tabela completa de jogos e classificação dos grupos no Sport Center.' },
+    nc5:    { tag:'Copa do Mundo 2026', title:'Vini Jr. salva o Brasil com golaço contra Marrocos no Mundial', img:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=900&q=80', meta:'13 jun 2026 · Copa do Mundo 2026', t1:'Vinicius Jr. foi o salvador do Brasil ao empatar contra Marrocos com um golaço de fora da área no 2º tempo. O atacante do Real Madrid recebeu na entrada da área e chutou no canto, sem chances para o goleiro marroquino.', t2:'Apesar do gol, Vini Jr. teve atuação irregular durante a partida e saiu de campo sob pressão por um desempenho mais consistente. O jogador prometeu melhorar e afirmou que o Brasil vai chegar à final.' },
+    nc6:    { tag:'Copa do Brasil', title:'Corinthians vira sobre o São Paulo e garante 3 pontos no Brasileirão', img:'https://a.espncdn.com/photo/2026/0510/r1656467_961x541_16-9.jpg', meta:'12 jun 2026 · Copa do Brasil', t1:'O Corinthians fez uma virada épica sobre o São Paulo por 3 a 2 e garantiu 3 pontos importantes no Brasileirão. Yuri Alberto foi o grande herói, com dois gols decisivos no segundo tempo na Neo Química Arena lotada.', t2:'A Fiel Torcida entrou em êxtase com a virada.' },
+    nc7:    { tag:'NBA Finals', title:'New York Knicks campeões da NBA 2026 após 53 anos de espera', img:'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=900&q=80', meta:'13 jun 2026 · NBA Finals', t1:'Os New York Knicks conquistaram o título da NBA ao derrotar o San Antonio Spurs por 94 a 90 no Jogo 5 das Finals. Jalen Brunson marcou 45 pontos e foi eleito MVP das Finals, encerrando o jejum de 53 anos da franquia nova-iorquina.', t2:'Os Knicks venceram a série por 4 a 1 e se tornaram campeões de forma memorável, virando em déficits de mais de 10 pontos em todos os quatro jogos que venceram. Wembanyama teve uma grande série pelo Spurs, mas não foi suficiente.' },
+    nc8:    { tag:'NBA Finals', title:'Wembanyama domina o 1º tempo mas Knicks viram mais uma vez e lideram 3 a 1', img:'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=900&q=80', meta:'11 jun 2026 · NBA Finals – Jogo 4', t1:'Victor Wembanyama bloqueou 5 arremessos e dominou o 1º tempo no Jogo 4 das Finals, mas os Knicks protagonizaram a maior virada da história dos playoffs da NBA, apagando uma desvantagem de 29 pontos para vencer por 107 a 106.', t2:'Brunson mais uma vez foi o grande destaque, marcando pontos cruciais nos minutos finais. O Jogo 5 seria disputado em San Antonio, mas os Knicks fecharam a série em casa com a vitória histórica no Jogo 5.' },
+    nc9:    { tag:'Copa do Brasil', title:'Copa do Brasil Feminina 2026: veja os duelos das oitavas de final', img:'https://s2-ge.glbimg.com/DsmWVfpJfxn96M7aOpTsjPVAzsY=/0x0:2048x1365/984x0/smart/filters:strip_icc()/s.glbimg.com/es/ge/f/original/2016/10/27/trofeu_4IyfvgS.jpg', meta:'Hoje · 15 jun 2026 · Copa do Brasil', t1:'A Copa do Brasil Feminina 2026 definiu os confrontos das oitavas de final na tarde desta segunda-feira em sorteio realizado na sede da CBF. O destaque desta fase é o clássico entre Ferroviária e Corinthians.', t2:'O único confronto das oitavas de final que não foi realizado ainda é o duelo entre São Paulo e Mauaense, que jogam no dia 6 de julho.' },
+    // ── Champions League cards
+    nc_ch1: { tag:'Champions League', title:'Real Madrid campeão da Champions 2024/25: 16º título europeu', img:'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80', meta:'31 mai 2026 · Final · Allianz Arena, Munique', t1:'O Real Madrid conquistou sua 16ª Champions League ao vencer o Paris Saint-Germain por 2 a 1 na final disputada em Munique. Vinicius Jr. abriu o placar, Dembélé empatou no 2º tempo, mas Bellingham marcou nos acréscimos para selar a vitória histórica.', t2:'Carlo Ancelotti se tornou o treinador mais vitorioso da história da Champions com sua quarta taça. Jude Bellingham foi eleito o MVP da final. A conquista encerra uma temporada épica dos merengues, que também foram campeões de La Liga.' },
+    nc_ch2: { tag:'Champions League', title:'UEFA anuncia sorteio da fase de grupos da Champions 2025/26', img:'https://s2-oglobo.glbimg.com/ZlweMWxMh8qhbMzwYEowWFmQwCs=/0x0:4973x3315/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2025/6/Z/VASpIiRbKBOQGDD4wMfQ/112152468-hosts-reshmin-chowdhury-2ndr-and-pedro-pinto-r-deliver-a-speech-during-the-draw-ceremony-f.jpg', meta:'5 jun 2026 · Champions League 2025/26', t1:'A UEFA divulgou o pote de times para o sorteio da fase de grupos da Champions League 2025/26. Real Madrid, Bayern de Munique, Manchester City e PSG estão no pote 1 como principais cabeças de chave da competição.', t2:'O sorteio acontece em 27 de junho em Mônaco. Arsenal, Barça, Inter de Milão e Borussia Dortmund também estarão entre os favoritos. Clubes brasileiros disputam as fases preliminares pela vaga na fase principal.' },
+    // ── Brasileirao cards
+    nc_br1: { tag:'Brasileirão', title:'Palmeiras lidera o Brasileirão 2026 com 41 pontos em 18 rodadas', img:'https://s2-cbn.glbimg.com/m8Qpr64llafulK33jBmI0QcX_BM=/0x0:955x565/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_d975fad146a14bbfad9e763717b09688/internal_photos/bs/2026/s/b/6m8Kv0TAOPQ4BlbAWnKQ/palmeiras.png', meta:'11 jun 2026 · Brasileirão Série A', t1:'O Palmeiras encerrou o primeiro semestre do Brasileirão 2026 na liderança isolada, com 41 pontos em 18 rodadas. Abel Ferreira destacou o equilíbrio coletivo como o principal motivo do bom desempenho até aqui.', t2:'Com a pausa para a Copa do Mundo, o campeonato retorna em julho. O Verdão tem 7 pontos de vantagem sobre o Flamengo, 2º colocado com 34 pontos.' },
+    nc_br2: { tag:'Brasileirão', title:'Flamengo goleia o Coritiba por 3 a 0 no Maracanã e se mantém no G4', img:'https://www.icururupu.com.br/arquivos/noticias/2833/flamengo-vence-o-coritiba-no-maracana-e-encosta-na-lideranca-do-brasileirao.jpg', meta:'30 mai 2026 · Brasileirão Série A', t1:'Com dois gols de Arrascaeta e um de Pedro, o Flamengo goleou o Coritiba por 3 a 0 no Maracanã pela 18ª rodada do Brasileirão. O resultado mantém o Rubro-negro no G4, em 2º lugar com 34 pontos.', t2:'O técnico Filipe Luís elogiou a consistência defensiva da equipe e apostou na requalificação durante a pausa da Copa do Mundo. O Flamengo volta a jogar em julho quando o Brasileirão retomar.' },
+    nc_br3: { tag:'Brasileirão', title:'Athletico-PR vence e sobe; Corinthians goleia o Grêmio fora de casa', img:'https://gazetadoparana.com.br/images/20260530222337_big_730x400_16.webp', meta:'30 mai 2026 · Brasileirão Série A', t1:'Na 18ª rodada do Brasileirão, o Athletico-PR venceu e subiu para a 4ª posição com 30 pontos. Já o Corinthians fez uma grande atuação fora de casa e goleou o Grêmio por 3 a 1 na Arena do Grêmio.', t2:'O artilheiro Kevin Viveros, do Athletico, lida a artilharia geral do campeonato com 11 gols. O Corinthians avança nas duas frentes: no Brasileirão e na Copa do Brasil.' },
+    // ── La Liga cards
+    nc_la1: { tag:'La Liga', title:'Barcelona é campeão da La Liga 2025/26 com Yamal brilhando', img:'https://pbs.twimg.com/media/HKD2NzKWoAAhoXo.jpg', meta:'31 mai 2026 · La Liga', t1:'O FC Barcelona conquistou o título da La Liga 2025/26 com duas rodadas de antecedência. Lamine Yamal foi o grande nome da temporada, com 19 gols e 21 assistências — números históricos para um jogador de 17 anos.', t2:'O treinador Hansi Flick elogiou o amadurecimento do elenco ao longo da temporada. O Barcelona terminou com 88 pontos, 5 à frente do Real Madrid, e já planeja a temporada 2026/27 com foco na Champions League.' },
+    nc_la2: { tag:'La Liga', title:'Real Madrid fecha temporada em 2º com Mbappé artilheiro com 22 gols', img:'https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/barcelona-real-madrid-laliga-1.jpg?w=419&h=283&crop=0', meta:'7 jun 2026 · La Liga', t1:'O Real Madrid terminou a La Liga 2025/26 em segundo lugar com 83 pontos. Kylian Mbappé encerrou sua primeira temporada como merengue sendo o artilheiro do clube com 22 gols, apesar de algumas críticas no começo do ano.', t2:'Carlo Ancelotti confirmou que o clube fará reforços pontuais na janela de verão. Com Mbappé mais adaptado e Bellingham de volta das lesões, o Real projeta uma temporada mais forte em 2026/27.' },
+    // ── Premier League cards
+    nc_pl1: { tag:'Premier League', title:'Arsenal campeão inglês após 22 anos, com 5 pontos sobre o City', img:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=900&q=80', meta:'7 jun 2026 · Premier League', t1:'O Arsenal de Mikel Arteta conquistou o título da Premier League 2025/26, encerrando um jejum de 22 anos sem o caneco inglês. Os Gunners terminaram com 89 pontos, 5 à frente do Manchester City.', t2:'Bukayo Saka foi o MVP da temporada para o Arsenal, com 20 gols e 17 assistências. Arteta se emocionou na celebração: "Este grupo merecia. Trabalhamos demais para chegar até aqui."' },
+    nc_pl2: { tag:'Premier League', title:'Manchester City anuncia reformulação com 4 a 5 reforços previstos para julho', img:'https://storage.stwonline.com.br/180graus/media/image_bank/2025/3/foto_4706902139994298244.jpg', meta:'9 jun 2026 · Premier League', t1:'Após uma temporada decepcionante com o vice-campeonato na Premier League, o Manchester City anunciou uma ampla reformulação do elenco. Guardiola confirmou que o clube busca de 4 a 5 reforços na janela de transferências de julho.', t2:'Haaland continua como peça central, mas a busca é por qualidade no meio-campo e na defesa. Nomes como Zubimendi, do Real Sociedad, e Jonathan David, do Lille, são especulados como alvos principais.' },
+    // ── Transferencias cards
+    nc_tr1: { tag:'Transferências', title:'Resumo do mercado: os maiores rumores de transferências de junho 2026', img:'https://assets.goal.com/images/v3/blt3914313eb4ae279c/Summer%20window%20stars.jpg?auto=webp&format=pjpg&width=3840&quality=60', meta:'11 jun 2026 · Mercado da Bola', t1:'Com a janela de transferências prestes a abrir oficialmente em julho, os rumores esquentam. Manchester City mira reforços no meio, Arsenal quer manter o elenco campeão e PSG busca substituto para Mbappé de alto nível.', t2:'No Brasil, a pausa da Copa do Mundo também aquece o mercado interno. Clubes brasileiros buscam aproveitar jogadores que vêm se destacando e que podem ficar disponíveis após o Mundial.' },
+    nc_tr2: { tag:'Transferências', title:'Neymar confirma desejo de voltar ao futebol brasileiro após a Copa', img:'https://lncimg.lance.com.br/uploads/2025/02/AFP__20230909__33UT4D7__v1__HighRes__FblWc2026SamericaQualifiersBraBol-scaled-aspect-ratio-512-320.jpg', meta:'9 jun 2026 · Mercado da Bola', t1:'Neymar Jr. confirmou em entrevista que planeja retornar ao futebol brasileiro após a Copa do Mundo de 2026. O jogador, que atua na Seleção como capitão, não descartou um retorno ao Santos ou ao Flamengo.', t2:'"Quero terminar minha carreira no Brasil, no clube do meu coração. Depois da Copa, verei qual é a melhor opção", afirmou Neymar. Flamengo e Santos já demonstraram interesse público no retorno da estrela.' },
   };
 
   function openArticle(id) {
@@ -2010,8 +2567,74 @@
     if (e.target === this) closeModal();
   });
 
-  // ESC to close
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  // ESC to close article modal
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal();
+      closeAuthModal();
+    }
+  });
+
+  /* ── AUTH MODAL ──────────────────────────────────────────────── */
+  function openAuthModal(tab) {
+    switchAuthTab(tab || 'login');
+    document.getElementById('auth-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAuthModal() {
+    document.getElementById('auth-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function authOverlayClick(e) {
+    if (e.target === document.getElementById('auth-modal')) closeAuthModal();
+  }
+
+  function switchAuthTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+  }
+
+  /* Simulated login — in a real project this would call a backend */
+  function doLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const pass  = document.getElementById('login-pass').value;
+    if (!email || !pass) { alert('Preencha e-mail e senha.'); return; }
+    const name = email.split('@')[0];
+    setLoggedIn(name);
+  }
+
+  function doRegister() {
+    const name  = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const pass  = document.getElementById('reg-pass').value;
+    if (!name || !email || !pass) { alert('Preencha todos os campos.'); return; }
+    if (pass.length < 6) { alert('A senha deve ter pelo menos 6 caracteres.'); return; }
+    setLoggedIn(name);
+  }
+
+  function doGoogleLogin() {
+    /* Simulated Google login */
+    setLoggedIn('Usuário Google');
+  }
+
+  function setLoggedIn(name) {
+    /* Update navbar */
+    document.getElementById('nav-login-btn').style.display = 'none';
+    const userWrap = document.getElementById('nav-user-wrap');
+    userWrap.classList.add('visible');
+    document.getElementById('nav-user-name').textContent = name;
+    document.getElementById('nav-avatar').textContent = name.charAt(0).toUpperCase();
+    closeAuthModal();
+  }
+
+  function logout() {
+    document.getElementById('nav-login-btn').style.display = '';
+    document.getElementById('nav-user-wrap').classList.remove('visible');
+  }
 </script>
 </body>
 </html>
