@@ -8,7 +8,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ─── RESET & TOKENS ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: default; }
+
+    html, body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    a, button, [onclick], label, select,
+    .nav-btn, .filter-btn, .sport-tab, .auth-tab,
+    .chip, .news-card, .news-item, .hero-main, .hero-side,
+    .trending-item, .quick-links a, .score-card, .footer-col a,
+    .scores-nav button, .player-news-item, .match-row,
+    .nav-login-btn, .nav-logout-btn, .nav-user-wrap,
+    .modal-close button, .auth-close-btn, .auth-submit,
+    .auth-google, .auth-hint a, .auth-tab,
+    .standings-widget, .quick-links {
+      cursor: pointer;
+    }
+
+    input, textarea, [contenteditable] {
+      cursor: text;
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
 
     :root {
       --red:      #CC0000;
@@ -1139,7 +1166,7 @@
           <div class="score-card">
             <span class="tag" style="background:#444">HOJE</span>
             <span class="score-teams">Argentina <b>vs</b> Argélia</span>
-            <span class="score-result" style="font-size:13px;color:#888">22:00</span>
+            <span class="score-result" style="font-size:13px;color:#888">02:00</span>
             <span class="score-info">Grupo G • Copa do Mundo 2026</span>
           </div>
 
